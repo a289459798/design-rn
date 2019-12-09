@@ -7,6 +7,8 @@ import ICAvatar from './src/avatar/ICAvatar';
 import ICCheckBox from './src/checkbox/ICCheckBox';
 import ICListView from './src/list/ICListView';
 import ICGridView from './src/list/ICGridView';
+import ICShadow from './src/shadow/ICShadow';
+import ICGradientView from './src/gradient/ICGradientView';
 import ICTouchable from './src/touchable/ICTouchable';
 import ICTouchableNativeFeedback from './src/touchable/ICTouchableNativeFeedback';
 import ICTouchableOpacity from './src/touchable/ICTouchableOpacity';
@@ -24,6 +26,8 @@ export {
     ICCheckBox,
     ICListView,
     ICGridView,
+    ICShadow,
+    ICGradientView,
     ICTouchable,
     ICTouchableNativeFeedback,
     ICTouchableOpacity,
