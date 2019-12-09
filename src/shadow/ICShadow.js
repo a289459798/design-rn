@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {View, ViewProps, Platform} from 'react-native';
 import ICScreen from '../theme/ICScreen';
+import NinePatchView from 'react-native-9patch-image';
 
 export default class ICShadow extends React.Component<ViewProps, any> {
 
