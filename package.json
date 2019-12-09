@@ -1,31 +1,57 @@
 {
-  "name": "@ichong/design-rn",
-  "version": "1.0.0",
-  "description": "## Getting started",
-  "main": "index.js",
-  "homepage": "https://gitee.com/petdoctor/design-rn.git#readme",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "_from": "git+https://gitee.com/petdoctor/design-rn.git",
+  "_id": "@ichong/design-rn@1.0.0",
+  "_inBundle": false,
+  "_integrity": "",
+  "_location": "/@ichong/design-rn",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "git",
+    "raw": "git+https://gitee.com/petdoctor/design-rn.git",
+    "rawSpec": "git+https://gitee.com/petdoctor/design-rn.git",
+    "saveSpec": "git+https://gitee.com/petdoctor/design-rn.git",
+    "fetchSpec": "https://gitee.com/petdoctor/design-rn.git",
+    "gitCommittish": null
   },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "git+https://gitee.com/petdoctor/design-rn.git#e593bd0a6332858635e4ee4c8837fa8f15d26312",
+  "_spec": "git+https://gitee.com/petdoctor/design-rn.git",
+  "_where": "/Users/zhangzy/workspace/android/5ichong/academy",
+  "author": {
+    "name": "zhangzy"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "react-native-elements": "^1.2.7",
+    "react-native-umshare": "^3.0.1",
+    "react-native-vector-icons": "^6.4.4"
+  },
+  "deprecated": false,
+  "description": "## Getting started",
+  "homepage": "https://gitee.com/petdoctor/design-rn.git#readme",
   "keywords": [
     "react-native"
   ],
-  "author": "zhangzy",
   "license": "ISC",
-  "dependencies": {
-    "react-native-elements": "^1.2.7",
-    "react-native-vector-icons": "^6.4.4",
-    "react-native-umshare": "^3.0.1"
-  },
+  "main": "index.js",
+  "name": "@ichong/design-rn",
   "peerDependencies": {
     "react-native": "^6.0.0",
     "react-native-elements": "^1.2.7",
     "react-native-vector-icons": ">6.0.0",
     "prop-types": "^15.7.2",
-    "react-native-umshare": "^3.0.1"
+    "react-native-umshare": "^3.0.1",
+    "react-native-9patch-image": "^0.3.4"
   },
   "repository": {
     "type": "git",
     "url": "https://gitee.com/petdoctor/design-rn.git"
-  }
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.0"
 }
