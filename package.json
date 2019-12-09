@@ -12,6 +12,9 @@
   ],
   "author": "zhangzy",
   "license": "ISC",
+  "dependencies": {
+    "react-native-elements": "^1.2.7"
+  },
   "peerDependencies": {
     "react-native": "^0.41.2",
     "react-native-elements": "^1.2.7"
