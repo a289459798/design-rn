@@ -1,23 +1,27 @@
 import {TextProps, Text} from 'react-native-elements';
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import ICColor from '../theme/ICColor';
 
-class ICText extends React.Component<TextProps, any> {
+export default class ICText extends React.Component<TextProps, any> {
+
+    static propTypes = {
+        gray: PropTypes.bool,
+        dark: PropTypes.bool,
+        light: PropTypes.bool,
+    };
+
+    static defaultProps = {
+        dark: true,
+        gray: false,
+        light: false,
+    };
+
     render() {
         return <Text
-        style={{color: this.props.gray ? '#999' : this.props.darkGrey ? '#666' : '#333'}}
-        {...this.props}/>;
+            style={{color: this.props.gray ? ICColor.gray : this.props.light ? ICColor.linghtGray : ICColor.darkGray}}
+            {...this.props}>
+            {this.props.children}
+        </Text>;
     }
 }
-
-ICText.propTypes = {
-    gray: PropTypes.bool,
-    darkGrey: PropTypes.bool,
-};
-
-ICText.defaultProps = {
-    gray: false,
-    darkGrey: false,
-};
-
-export default ICText;
