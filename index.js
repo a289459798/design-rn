@@ -1,6 +1,5 @@
+import ICText from './src/text/ICText'
 
-import { NativeModules } from 'react-native';
-
-const { RNDesignRn } = NativeModules;
-
-export default RNDesignRn;
+export {
+    ICText
+}
