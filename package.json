@@ -13,7 +13,8 @@
   "author": "zhangzy",
   "license": "ISC",
   "peerDependencies": {
-    "react-native": "^0.41.2"
+    "react-native": "^0.41.2",
+    "react-native-elements": "^1.2.7"
   },
   "repository": {
     "type": "git",
