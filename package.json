@@ -16,7 +16,7 @@
     "react-native-elements": "^1.2.7"
   },
   "peerDependencies": {
-    "react-native": "^0.41.2",
+    "react-native": "^6.0.0",
     "react-native-elements": "^1.2.7"
   },
   "repository": {
