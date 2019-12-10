@@ -2,5 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.ichong.zzy.design.rn">
 
+    <application>
+        <service android:name=".service.DesignService">
+            <intent-filter>
+                <action android:name="com.ichong.zzy.design.service"></action>
+            </intent-filter>
+        </service>
+    </application>
 </manifest>
   
