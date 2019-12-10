@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.author             = { "author" => "zhangzy@5ichong.cn" }
   s.platform     = :ios, "9.0"
   s.source       = { :git => "https://gitee.com/petdoctor/design-rn.git", :tag => "master" }
-  s.source_files  = "RNDesignRn/**/*.{h,m}"
+  s.source_files  = "ios/**/*.{h,m}"
   s.requires_arc = true
 
 
