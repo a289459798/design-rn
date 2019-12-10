@@ -8,6 +8,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RNSplashScreen : NSObject <RCTBridgeModule>
 
++ (void) show;
+
++ (void) hide;
+
 @end
 
 NS_ASSUME_NONNULL_END

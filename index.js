@@ -15,6 +15,7 @@ import ICTouchableOpacity from './src/touchable/ICTouchableOpacity';
 import ICFont from './src/theme/ICFont';
 import ICScreen from './src/theme/ICScreen';
 import ICColor from './src/theme/ICColor';
+import ICSplashScreen from './src/splashscreen/ICSplashScreen';
 
 export {
     ICText,
@@ -34,4 +35,5 @@ export {
     ICFont,
     ICScreen,
     ICColor,
+    ICSplashScreen,
 };

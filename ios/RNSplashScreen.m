@@ -6,6 +6,9 @@
 //
 
 #import "RNSplashScreen.h"
+#import "FLAnimatedImageView.h"
+#import "FLAnimatedImage.h"
+#import "FileHelper.h"
 
 static UIView *_view;
 static FLAnimatedImageView *_imageView;
@@ -27,7 +30,6 @@ RCT_EXPORT_MODULE()
     UIWindow *window = [[UIApplication sharedApplication] delegate].window;
     CGSize viewSize = window.bounds.size;
     NSString *viewOrientation = @"Portrait";
-    
     NSArray* imagesDict = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"UILaunchImages"];
     for (NSDictionary* dict in imagesDict) {
         CGSize imageSize = CGSizeFromString(dict[@"UILaunchImageSize"]);
@@ -39,8 +41,7 @@ RCT_EXPORT_MODULE()
             launchView.frame = window.bounds;
             launchView.contentMode = UIViewContentModeScaleAspectFill;
             [_view addSubview:launchView];
-            int marginBottom = 180;
-            
+            float marginBottom = 100.0 / 667 * window.bounds.size.height;
             _imageView = [[FLAnimatedImageView alloc] initWithFrame:CGRectMake(0, 0, window.bounds.size.width, window.bounds.size.height - marginBottom)];
             _imageView.contentMode = UIViewContentModeScaleAspectFill;
             _imageView.clipsToBounds = YES;
@@ -50,7 +51,6 @@ RCT_EXPORT_MODULE()
             
             [window.rootViewController.view addSubview:_view];
             [window.rootViewController.view bringSubviewToFront:_view];
-            
             break;
         }
     }
@@ -64,7 +64,6 @@ RCT_EXPORT_MODULE()
             _timer = nil;
         }
         [UIView animateWithDuration:1.0f delay:0.1f options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-            
             _view.alpha = 0.0f;
             _view.layer.transform = CATransform3DScale(CATransform3DIdentity, 1.2, 1.2, 1);
             
@@ -72,7 +71,6 @@ RCT_EXPORT_MODULE()
             [_view removeFromSuperview];
         }];
     });
-    
 }
 
 - (void) click {
@@ -84,33 +82,65 @@ RCT_EXPORT_MODULE()
 }
 
 RCT_EXPORT_METHOD(hide) {
-    [RCTSplashScreen hide];
+    [RNSplashScreen hide];
 }
 
-RCT_EXPORT_METHOD(showAd: (NSDictionary *) data
+- (void)updateProgress {
+    _time -= 1;
+    if(_time <= 0) {
+        [self hide];
+    }
+}
+
+RCT_EXPORT_METHOD(showAd: (NSString *) imageUrl
+                  time: (int)time
                   Callback: (RCTResponseSenderBlock)callback) {
     
     _block = callback;
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        _time = 3.0;
-        {
-            RCTResponseSenderBlock _block;
-        }
-        NSString *imageUrl = [data objectForKey:@"source"];
-        if([imageUrl hasSuffix:@".gif"]) {
-            NSData *imageData = [NSData dataWithContentsOfFile:imageUrl];
-            _imageView.animatedImage = [FLAnimatedImage animatedImageWithGIFData:imageData];
-        } else {
-            [_imageView setImage:[UIImage imageNamed: imageUrl]];
-        }
-        
-        [_imageView setUserInteractionEnabled:YES];
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(click)];
-        [_imageView addGestureRecognizer:tap];
-        _timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(updateProgress) userInfo:nil repeats:YES];
-    });
+    NSString *localImage = [NSString stringWithFormat: @"%@/%@", [FileHelper getCachePath], [FileHelper md5:imageUrl]];
+    if([FileHelper fileExists:localImage]) {
+        // 显示
+        uint8_t c;
+        NSData *imageData = [NSData dataWithContentsOfFile:localImage];
+        [imageData getBytes:&c length:1];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _time = time;
+            // 判断图片类型
+            switch (c) {
+                case 0x47:
+                    _imageView.animatedImage = [FLAnimatedImage animatedImageWithGIFData:imageData];
+                    break;
+                default:
+                    [_imageView setImage:[UIImage imageNamed: localImage]];
+                    break;
+            }
+            
+            UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(_imageView.bounds.size.width - 50, _imageView.bounds.size.height - 50, 40, 25)];
+            textLabel.text = @"跳过";
+            textLabel.font = [UIFont systemFontOfSize:12];
+            textLabel.textAlignment = NSTextAlignmentCenter;
+            textLabel.textColor = [UIColor whiteColor];
+            textLabel.backgroundColor = [UIColor colorWithRed:0/255 green:0/255 blue:0/255 alpha:0.2];
+            [textLabel setUserInteractionEnabled:YES];
+            UITapGestureRecognizer *pass = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hide)];
+            [textLabel addGestureRecognizer:pass];
+            
+            [_imageView addSubview:textLabel];
+            [_imageView setUserInteractionEnabled:YES];
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(click)];
+            [_imageView addGestureRecognizer:tap];
+            
+            _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateProgress) userInfo:nil repeats:YES];
+        });
+    } else {
+        // 下载
+        [RNSplashScreen hide];
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]];
+            [FileHelper writeImage:localImage data:imageData];
+            callback(@[localImage]);
+        });
+    }
 }
 
 @end
