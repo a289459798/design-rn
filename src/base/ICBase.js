@@ -90,13 +90,13 @@ export default class ICBase extends React.PureComponent {
     }
 
     setTimeout(fn, time): number {
-        let time = setTimeout(fn, time);
-        return this.#time.push(time);
+        let t = setTimeout(fn, time);
+        return this.#time.push(t);
     }
 
-    setInterval(): number {
-        let time = setInterval(fn, time);
-        return this.#interval.push(time);
+    setInterval(fn, time): number {
+        let t = setInterval(fn, time);
+        return this.#interval.push(t);
     }
 
     clearTimeout(id: number) {

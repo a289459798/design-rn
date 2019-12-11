@@ -192,6 +192,7 @@ public class RNSplashScreenModule extends ReactContextBaseJavaModule {
             service.putExtra("image", image);
             service.putExtra("localImage", adFileStr);
             activity.startService(service);
+            hide(activity);
         }
 
     }

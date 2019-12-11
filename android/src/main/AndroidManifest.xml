@@ -8,6 +8,15 @@
                 <action android:name="com.ichong.zzy.design.service"></action>
             </intent-filter>
         </service>
+
+        <service
+            android:name="com.ichong.module.downloadmodule.DownloadService"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.common2345.download.service" />
+            </intent-filter>
+        </service>
     </application>
 </manifest>
   

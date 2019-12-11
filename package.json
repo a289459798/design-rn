@@ -20,7 +20,7 @@
     "#USER",
     "/"
   ],
-  "_resolved": "git+https://gitee.com/petdoctor/design-rn.git#23b52986c9a884402534a9de364a068eafdbb3b6",
+  "_resolved": "git+https://gitee.com/petdoctor/design-rn.git#1e8763f8e439b154de775ec9ed52f6814eeee471",
   "_spec": "@ichong/design-rn@git+https://gitee.com/petdoctor/design-rn.git",
   "_where": "/Users/zhangzy/workspace/android/5ichong/academy",
   "author": {
@@ -31,8 +31,8 @@
     "react-native-elements": "^1.2.7",
     "react-native-linear-gradient": "^2.5.6",
     "react-native-umshare": "^3.0.1",
-    "react-native-webview": "^7.6.0",
-    "react-native-vector-icons": "^6.4.4"
+    "react-native-vector-icons": "^6.4.4",
+    "react-native-webview": "^7.6.0"
   },
   "deprecated": false,
   "description": "## Getting started",

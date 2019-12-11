@@ -16,6 +16,10 @@ import ICFont from './src/theme/ICFont';
 import ICScreen from './src/theme/ICScreen';
 import ICColor from './src/theme/ICColor';
 import ICSplashScreen from './src/splashscreen/ICSplashScreen';
+import ICWebView from './src/webview/ICWebView';
+import ICBase from './src/base/ICBase';
+import ICGuide from './src/guide/ICGuide';
+import ICImageBrowser from './src/image/ICImageBrowser';
 
 export {
     ICText,
@@ -36,4 +40,8 @@ export {
     ICScreen,
     ICColor,
     ICSplashScreen,
+    ICWebView,
+    ICBase,
+    ICGuide,
+    ICImageBrowser,
 };
