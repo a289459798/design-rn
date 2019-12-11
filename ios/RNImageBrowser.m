@@ -17,7 +17,7 @@
 RCT_EXPORT_MODULE()
 
 RCT_EXPORT_METHOD(show:(NSArray *)list index:(int)index) {
-    
+
     NSMutableArray *items = @[].mutableCopy;
     UIWindow *window = [[UIApplication sharedApplication] delegate].window;
     CGSize viewSize = window.bounds.size;
@@ -28,7 +28,7 @@ RCT_EXPORT_METHOD(show:(NSArray *)list index:(int)index) {
         KSPhotoItem *item = [KSPhotoItem itemWithSourceView:imageView imageUrl:[NSURL URLWithString:url]];
         [items addObject:item];
     }
-    KSPhotoBrowser *browser = [KSPhotoBrowser browserWithPhotoItems:items selectedIndex:0];
+    KSPhotoBrowser *browser = [KSPhotoBrowser browserWithPhotoItems:items selectedIndex:index];
     [browser showFromViewController:window.rootViewController];
 }
 
