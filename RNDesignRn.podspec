@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
 
   s.dependency "React"
   s.dependency "SDWebImage/GIF"
-  s.dependency "YBImageBrowser"
+  s.dependency "PYPhotoBrowser"
 
 end
 
