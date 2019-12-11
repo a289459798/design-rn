@@ -6,7 +6,7 @@
 //
 
 #import "RNImageBrowser.h"
-#import "PYPhotoBrowser.h"
+#import "KSPhotoBrowser.h"
 
 @implementation RNImageBrowser
 
@@ -18,16 +18,18 @@ RCT_EXPORT_MODULE()
 
 RCT_EXPORT_METHOD(show:(NSArray *)list index:(int)index) {
     
-    NSMutableArray *originalImageUrls = [NSMutableArray array];
-    // 添加图片
-    for(int i = 0; i < list.count; i++) {
-        [originalImageUrls addObject:list[i]];
+    NSMutableArray *items = @[].mutableCopy;
+    UIWindow *window = [[UIApplication sharedApplication] delegate].window;
+    CGSize viewSize = window.bounds.size;
+    for (int i = 0; i < list.count; i++) {
+        // Get the large image url
+        NSString *url = [list[i] stringByReplacingOccurrencesOfString:@"bmiddle" withString:@"large"];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, viewSize.width, viewSize.height)];
+        KSPhotoItem *item = [KSPhotoItem itemWithSourceView:imageView imageUrl:[NSURL URLWithString:url]];
+        [items addObject:item];
     }
-    
-    PYPhotosView *photosView = [PYPhotosView photosViewWithThumbnailUrls:@[] originalUrls:originalImageUrls];
-    // 3. 添加photosView
-    [[UIApplication sharedApplication].keyWindow.rootViewController.view addSubview:photosView];
-    
+    KSPhotoBrowser *browser = [KSPhotoBrowser browserWithPhotoItems:items selectedIndex:0];
+    [browser showFromViewController:window.rootViewController];
 }
 
 @end
