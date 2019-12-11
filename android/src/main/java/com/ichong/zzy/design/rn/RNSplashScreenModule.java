@@ -118,6 +118,7 @@ public class RNSplashScreenModule extends ReactContextBaseJavaModule {
             if (time <= 0) {
                 timerTask.cancel();
                 time = msg.what;
+                hide(mActivity.get());
             }
         }
     };
@@ -186,7 +187,7 @@ public class RNSplashScreenModule extends ReactContextBaseJavaModule {
         } else {
             // 下载
             Intent service = new Intent(activity, DesignService.class);
-                service.setAction("com.ichong.zzy.design.service");
+            service.setAction("com.ichong.zzy.design.service");
             service.putExtra("type", "ad_download");
             service.putExtra("image", image);
             service.putExtra("localImage", adFileStr);
