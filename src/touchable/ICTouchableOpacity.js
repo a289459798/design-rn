@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {TouchableOpacity} from 'react-native';
 
-export default class ICTouchableOpacity extends React.Component<Props, any> {
+export default class ICTouchableOpacity extends React.PureComponent<Props, any> {
 
     render() {
         return <TouchableOpacity

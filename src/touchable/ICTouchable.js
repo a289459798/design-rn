@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Touchable} from 'react-native';
 
-export default class ICTouchable extends React.Component<Props, any> {
+export default class ICTouchable extends React.PureComponent<Props, any> {
 
     render() {
         return <Touchable

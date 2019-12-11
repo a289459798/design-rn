@@ -2,7 +2,7 @@ import * as React from 'react';
 import {View, ViewProps} from 'react-native';
 import ICScreen from '../theme/ICScreen';
 
-export default class ICRadius extends React.Component<ViewProps, any> {
+export default class ICRadius extends React.PureComponent<ViewProps, any> {
 
     render() {
 

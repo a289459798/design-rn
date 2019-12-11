@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import ICColor from '../theme/ICColor';
 import {Analytics} from 'react-native-umshare';
 
-export default class ICText extends React.Component<TextProps, any> {
+export default class ICText extends React.PureComponent<TextProps, any> {
 
     static propTypes = {
         gray: PropTypes.bool,

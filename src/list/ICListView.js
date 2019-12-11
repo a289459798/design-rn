@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {FlatList, FlatListProps} from 'react-native';
 
-export default class ICListView extends React.Component<FlatListProps, any> {
+export default class ICListView extends React.PureComponent<FlatListProps, any> {
 
     _renderFooter(loading, hasMore) {
         if (loading && hasMore) {
