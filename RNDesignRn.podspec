@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
 
   s.dependency "React"
   s.dependency "SDWebImage"
-  s.dependency "KSPhotoBrowser", "~> 0.3.0"
+  s.dependency "YBImageBrowser"
 
 end
 
