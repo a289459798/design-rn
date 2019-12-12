@@ -6,12 +6,11 @@
 //
 
 #import "RNSplashScreen.h"
-#import "FLAnimatedImageView.h"
-#import "FLAnimatedImage.h"
 #import "FileHelper.h"
+#import "SDWebImage.h"
 
 static UIView *_view;
-static FLAnimatedImageView *_imageView;
+static SDAnimatedImageView *_imageView;
 static float _time;
 static NSTimer *_timer;
 
@@ -42,7 +41,7 @@ RCT_EXPORT_MODULE()
             launchView.contentMode = UIViewContentModeScaleAspectFill;
             [_view addSubview:launchView];
             float marginBottom = 100.0 / 667 * window.bounds.size.height;
-            _imageView = [[FLAnimatedImageView alloc] initWithFrame:CGRectMake(0, 0, window.bounds.size.width, window.bounds.size.height - marginBottom)];
+            _imageView = [[SDAnimatedImageView alloc] initWithFrame:CGRectMake(0, 0, window.bounds.size.width, window.bounds.size.height - marginBottom)];
             _imageView.contentMode = UIViewContentModeScaleAspectFill;
             _imageView.clipsToBounds = YES;
             
@@ -108,7 +107,7 @@ RCT_EXPORT_METHOD(showAd: (NSString *) imageUrl
             // 判断图片类型
             switch (c) {
                 case 0x47:
-                    _imageView.animatedImage = [FLAnimatedImage animatedImageWithGIFData:imageData];
+                    [_imageView sd_setImageWithURL:[NSURL fileURLWithPath:localImage]];
                     break;
                 default:
                     [_imageView setImage:[UIImage imageNamed: localImage]];
