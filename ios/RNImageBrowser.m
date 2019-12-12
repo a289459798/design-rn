@@ -6,9 +6,12 @@
 //
 
 #import "RNImageBrowser.h"
-#import "KSPhotoBrowser.h"
+#import "YBImageBrowser.h"
+#import "RCTUIManager.h"
 
 @implementation RNImageBrowser
+
+@synthesize bridge = _bridge;
 
 - (dispatch_queue_t)methodQueue
 {
@@ -19,17 +22,20 @@ RCT_EXPORT_MODULE()
 RCT_EXPORT_METHOD(show:(NSArray *)list index:(int)index) {
 
     NSMutableArray *items = @[].mutableCopy;
-    UIWindow *window = [[UIApplication sharedApplication] delegate].window;
-    CGSize viewSize = window.bounds.size;
-    for (int i = 0; i < list.count; i++) {
-        // Get the large image url
-        NSString *url = [list[i] stringByReplacingOccurrencesOfString:@"bmiddle" withString:@"large"];
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, viewSize.width, viewSize.height)];
-        KSPhotoItem *item = [KSPhotoItem itemWithSourceView:imageView imageUrl:[NSURL URLWithString:url]];
-        [items addObject:item];
+    for(int i = 0; i < list.count; i++) {
+        YBIBImageData *data = [YBIBImageData new];
+        NSDictionary *dict = list[i];
+        data.imageURL = [dict objectForKey:@"image"];
+        if([dict objectForKey:@"tag"]) {
+            data.projectiveView = [self.bridge.uiManager viewForReactTag:[dict objectForKey:@"tag"]];
+        }
+        [items addObject:data];
     }
-    KSPhotoBrowser *browser = [KSPhotoBrowser browserWithPhotoItems:items selectedIndex:index];
-    [browser showFromViewController:window.rootViewController];
+    
+    YBImageBrowser *browser = [YBImageBrowser new];
+    browser.dataSourceArray = items;
+    browser.currentPage = index;
+    [browser show];
 }
 
 @end
