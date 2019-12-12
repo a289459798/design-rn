@@ -115,6 +115,10 @@ export default class ICBase extends React.PureComponent {
         this.#interval[id - 1] = null;
     }
 
+    getAppName() {
+        return '应用';
+    }
+
     onBackButtonPressAndroid = () => {
         let nav = this.props.navigation.getParam('nav');
         if (nav) {
@@ -126,7 +130,7 @@ export default class ICBase extends React.PureComponent {
                 }
                 this.lastBackPressed = Date.now();
 
-                Toast.show('再按一次退出爱宠采购');
+                Toast.show('再按一次退出' + this.getAppName());
             } else if (this.getHandleBack) {
                 this.getHandleBack();
             } else {
