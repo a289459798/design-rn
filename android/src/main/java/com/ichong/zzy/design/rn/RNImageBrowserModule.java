@@ -33,7 +33,8 @@ public class RNImageBrowserModule extends ReactContextBaseJavaModule {
 
         ArrayList<String> images = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
-            images.add(list.getString(i));
+            ReadableMap map = list.getMap(i);
+            images.add(map.getString("image"));
         }
         ImagePreview
             .getInstance()
