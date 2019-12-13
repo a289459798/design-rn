@@ -4,7 +4,7 @@ import ICTouchableNativeFeedback from '../touchable/ICTouchableNativeFeedback';
 import ICFont from '../theme/ICFont';
 import ICText from '../text/ICText';
 
-export default class ICHeaderButton extends React.PureComponent {
+export default class ICHeaderTitleICHeaderButton extends React.PureComponent {
 
     render() {
         if (this.props.items) {
@@ -35,5 +35,6 @@ export default class ICHeaderButton extends React.PureComponent {
                 </View>
             );
         }
+        return null;
     }
 }

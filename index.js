@@ -21,6 +21,8 @@ import ICBase from './src/base/ICBase';
 import ICGuide from './src/guide/ICGuide';
 import ICImageBrowser from './src/image/ICImageBrowser';
 import ICHeaderView from './src/header/ICHeaderView';
+import ICHeaderTitle from './src/header/ICHeaderTitle';
+import ICHeaderButton from './src/header/ICHeaderButton';
 
 export {
     ICText,
@@ -46,4 +48,6 @@ export {
     ICGuide,
     ICImageBrowser,
     ICHeaderView,
+    ICHeaderButton,
+    ICHeaderTitle,
 };
