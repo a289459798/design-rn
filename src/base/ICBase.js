@@ -1,11 +1,46 @@
 import * as React from 'react';
-import {BackHandler, Platform, StatusBar} from 'react-native';
+import {BackHandler, Platform, StatusBar, SafeAreaView, View} from 'react-native';
 import {Analytics} from 'react-native-umshare';
+import ICHeaderView from '../header/ICHeaderView';
+import ICHeaderButton from '../header/ICHeaderButton';
+import ICHeaderTitle from '../header/ICHeaderTitle';
+import ICFont from '../theme/ICFont';
 
 export default class ICBase extends React.PureComponent {
 
+    static navigationOptions = ({navigation, defaultOptions}, params = {}) => {
+
+        return {
+            headerStyle: Object.assign({
+                height: 44,
+                backgroundColor: '#fff',
+                borderBottomWidth: 0,
+                shadowOpacity: 0,
+                elevation: 0,
+            }, navigation.getParam('headerStyle'), params.headerStyle),
+            headerRight: navigation.getParam('headerRight') || params.headerRight,
+            headerLeft: navigation.getParam('headerLeft') || params.headerLeft,
+            title: navigation.getParam('title') || params.title,
+            headerTitleStyle: Object.assign({
+                fontSize: ICFont.calc(16),
+                fontWeight: 'normal',
+            }, navigation.getParam('headerTitleStyle')),
+            headerTintColor: navigation.getParam('headerTintColor') || params.headerTintColor || '#333',
+            headerTitle: navigation.getParam('headerTitle') || params.headerTitle,
+        };
+    };
+
     #time;
     #interval;
+    #statueStyle = {
+        barStyle: 'dark-content',
+        backgroundColor: '#fff',
+        translucent: false,
+    };
+    #style = {
+        safeAreaBackgroundColor: '#fff',
+        contentBackgroundColor: '#f1f1f1',
+    };
 
     constructor(props) {
         super(props);
@@ -16,6 +51,92 @@ export default class ICBase extends React.PureComponent {
 
         this.#time = [];
         this.#interval = [];
+    }
+
+    setHeader(view) {
+        this.props.navigation.setParams({
+            header: view,
+        });
+    }
+
+    setNavigationOptions(data) {
+        this.props.navigation.setParams(data);
+    }
+
+    setHeaderTitleView(view) {
+        this.props.navigation.setParams({
+            headerTitle: view,
+        });
+    }
+
+    setHeaderLeft(items) {
+        this.props.navigation.setParams({
+            headerLeft: <ICHeaderButton items={items}/>,
+        });
+    }
+
+    setHeaderLeftView(view) {
+        this.props.navigation.setParams({
+            headerLeft: view,
+        });
+    }
+
+    setHeaderRightView(view) {
+        this.props.navigation.setParams({
+            headerRight: view,
+        });
+    }
+
+    setHeaderRight(items) {
+        this.props.navigation.setParams({
+            headerRight: <ICHeaderButton items={items}/>,
+        });
+    }
+
+    setHeaderTitle(title) {
+        this.props.navigation.setParams({
+            title: title,
+        });
+    }
+
+
+    renderView() {
+        return null;
+    }
+
+    setStatusStyle(style) {
+        this.#statueStyle = {
+            ...this.#statueStyle,
+            ...style,
+        };
+    }
+
+    setStyle(style) {
+        this.#style = {
+            ...this.#style,
+            ...style,
+        };
+    }
+
+    renderHeader() {
+        return null;
+    }
+
+    render() {
+        return (
+            <SafeAreaView style={{flex: 1, backgroundColor: this.#style.safeAreaBackgroundColor}}>
+                <StatusBar
+                    barStyle={this.#statueStyle.barStyle}
+                    backgroundColor={this.#statueStyle.backgroundColor}
+                    translucent={this.#statueStyle.translucent}
+                />
+                {this.renderHeader()}
+                <View
+                    style={[{flex: 1, backgroundColor: this.#style.safeAreaBackgroundColor}, this.props.contentStyle]}>
+                    {this.renderView()}
+                </View>
+            </SafeAreaView>
+        );
     }
 
     get params() {
@@ -160,8 +281,9 @@ export default class ICBase extends React.PureComponent {
         }
         this.#time = [];
         this.#interval = [];
-
-        Analytics.pageEnd(this.props.navigation.state.routeName);
+        if (this.props.navigation.state.routeName) {
+            Analytics.pageEnd(this.props.navigation.state.routeName);
+        }
         if (Platform.OS == 'android') {
             BackHandler.removeEventListener('hardwareBackPress', this.onBackButtonPressAndroid);
         }
@@ -169,7 +291,10 @@ export default class ICBase extends React.PureComponent {
 
     componentDidMount(): void {
 
-        Analytics.pageBegin(this.props.navigation.state.routeName);
+        if (this.props.navigation.state.routeName) {
+            Analytics.pageBegin(this.props.navigation.state.routeName);
+        }
+
         if (Platform.OS == 'android') {
             StatusBar.setBackgroundColor('#fff');
             StatusBar.setTranslucent(false);
