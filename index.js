@@ -13,6 +13,7 @@ import ICGradientView from './src/gradient/ICGradientView';
 import ICTouchable from './src/touchable/ICTouchable';
 import ICTouchableNativeFeedback from './src/touchable/ICTouchableNativeFeedback';
 import ICTouchableOpacity from './src/touchable/ICTouchableOpacity';
+import ICTouchableWithoutFeedback from './src/touchable/ICTouchableWithoutFeedback';
 import ICFont from './src/theme/ICFont';
 import ICScreen from './src/theme/ICScreen';
 import ICColor from './src/theme/ICColor';
@@ -27,6 +28,7 @@ import ICHeaderTitle from './src/header/ICHeaderTitle';
 import ICHeaderButton from './src/header/ICHeaderButton';
 import ICLine from './src/view/ICLine';
 import ICRadius from './src/radius/ICRadius';
+import ICBottomSheet from './src/modal/ICBottomSheet';
 
 export {
     ICText,
@@ -44,6 +46,7 @@ export {
     ICTouchable,
     ICTouchableNativeFeedback,
     ICTouchableOpacity,
+    ICTouchableWithoutFeedback,
     ICFont,
     ICScreen,
     ICColor,
@@ -58,4 +61,5 @@ export {
     ICLine,
     ICRadius,
     ICWebViewComponent,
+    ICBottomSheet,
 };
