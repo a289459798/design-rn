@@ -1,7 +1,6 @@
 import React from 'react';
-import {View, TouchableWithoutFeedback} from 'react-native';
+import {View, TouchableWithoutFeedback, Modal} from 'react-native';
 import BottomSheet from 'reanimated-bottom-sheet';
-import Modal from "react-native-modal";
 
 export default class ICBottomSheet extends React.PureComponent {
 
@@ -13,7 +12,7 @@ export default class ICBottomSheet extends React.PureComponent {
     }
 
     render() {
-        
+
         return (
             <Modal
                 animationType='fade'
@@ -28,7 +27,7 @@ export default class ICBottomSheet extends React.PureComponent {
                     bottom: 0,
                     left: 0,
                     right: 0,
-                }} onPress={() => this.snapTo(1)}>
+                }} onPress={() => this.snapTo(0)}>
                     <View style={{
                         backgroundColor: 'rgba(0, 0, 0, 0.4)',
                         width: '100%',
@@ -37,7 +36,7 @@ export default class ICBottomSheet extends React.PureComponent {
                 </TouchableWithoutFeedback>
                 <BottomSheet
                     ref={(r) => this.sheet = r}
-                    snapPoints={[this.props.height || '80%', 0]}
+                    snapPoints={[0, this.props.height || '80%']}
                     renderContent={() => {
                         if (this.props.renderContent) {
                             return this.props.renderContent;
@@ -49,9 +48,14 @@ export default class ICBottomSheet extends React.PureComponent {
                             {this.props.children}
                         </View>);
                     }}
+                    onOpenEnd={() => {
+                        this.open = true;
+                    }}
                     renderHeader={this.props.renderHeader}
                     onCloseEnd={() => {
-                        this.toggle();
+                        if (this.open) {
+                            this.hide();
+                        }
                     }}
                     {...this.props}
                     style={[{zIndex: 9}, this.props.style]}
@@ -64,14 +68,15 @@ export default class ICBottomSheet extends React.PureComponent {
         this.setState(state => ({
             visible: true,
         }), () => {
-            this.sheet.snapTo(0);
+            this.sheet.snapTo(1);
         });
     }
 
-    toggle() {
+    hide() {
         this.setState(state => ({
-            visible: !state.visible,
+            visible: false,
         }), () => {
+            this.open = false;
         });
     }
 
