@@ -16,8 +16,8 @@ export default class ICRadius extends React.PureComponent<ViewProps, any> {
             style.borderBottomLeftRadius = radius[2];
             style.borderTopLeftRadius = radius[3];
         }
-        return <View {...this.props} style={[style, {...this.props.style}]}>
-            {this.prps.children}
+        return <View {...this.props} style={[style, this.props.style]}>
+            {this.props.children}
         </View>;
     }
 }

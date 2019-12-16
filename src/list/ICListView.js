@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FlatList, FlatListProps} from 'react-native';
+import {FlatList, FlatListProps, View, Text, ActivityIndicator, RefreshControl} from 'react-native';
 
 export default class ICListView extends React.PureComponent<FlatListProps, any> {
 

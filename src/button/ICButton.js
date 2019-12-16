@@ -13,6 +13,8 @@ export default class ICButton extends React.Component<ButtonProps, any> {
                 }
                 this.props.onPress && this.props.onPress(e);
             }}
-            {...this.props}/>;
+            {...this.props}
+            buttonStyle={[{padding: 0}, this.props.buttonStyle]}
+        />;
     }
 }

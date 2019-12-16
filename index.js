@@ -2,6 +2,7 @@ import ICText from './src/text/ICText';
 import ICInput from './src/input/ICInput';
 import ICImage from './src/image/ICImage';
 import ICButton from './src/button/ICButton';
+import ICGradientButton from './src/button/ICGradientButton';
 import ICBadge from './src/badge/ICBadge';
 import ICAvatar from './src/avatar/ICAvatar';
 import ICCheckBox from './src/checkbox/ICCheckBox';
@@ -23,12 +24,15 @@ import ICImageBrowser from './src/image/ICImageBrowser';
 import ICHeaderView from './src/header/ICHeaderView';
 import ICHeaderTitle from './src/header/ICHeaderTitle';
 import ICHeaderButton from './src/header/ICHeaderButton';
+import ICLine from './src/view/ICLine';
+import ICRadius from './src/radius/ICRadius';
 
 export {
     ICText,
     ICInput,
     ICImage,
     ICButton,
+    ICGradientButton,
     ICBadge,
     ICAvatar,
     ICCheckBox,
@@ -50,4 +54,6 @@ export {
     ICHeaderView,
     ICHeaderButton,
     ICHeaderTitle,
+    ICLine,
+    ICRadius,
 };

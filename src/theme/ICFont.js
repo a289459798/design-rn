@@ -1,6 +1,14 @@
 import ICScreen from './ICScreen';
 
 export default {
+    f1: ICScreen.calc(1),
+    f2: ICScreen.calc(2),
+    f3: ICScreen.calc(3),
+    f4: ICScreen.calc(4),
+    f5: ICScreen.calc(5),
+    f6: ICScreen.calc(6),
+    f7: ICScreen.calc(7),
+    f8: ICScreen.calc(8),
     f9: ICScreen.calc(9),
     f10: ICScreen.calc(10),
     f11: ICScreen.calc(11),

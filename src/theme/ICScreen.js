@@ -7,7 +7,7 @@ export default {
         if (!size) {
             return Dimensions.get('window').width;
         }
-
+        
         return size * Dimensions.get('window').width / defaultSize;
     },
 };

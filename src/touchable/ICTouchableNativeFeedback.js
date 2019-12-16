@@ -23,6 +23,7 @@ export default class ICTouchableNativeFeedback extends React.PureComponent<Props
                 }
                 this.props.onPress && this.props.onPress(e);
             }}
+            underlayColor={'transparent'}
             {...this.props}>
             {this.props.children}
         </TouchableHighlight>;

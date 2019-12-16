@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {BackHandler, Platform, StatusBar, SafeAreaView, View} from 'react-native';
+import {BackHandler, Platform, StatusBar, SafeAreaView, View, StyleSheet, Linking} from 'react-native';
 import {Analytics} from 'react-native-umshare';
 import ICHeaderView from '../header/ICHeaderView';
 import ICHeaderButton from '../header/ICHeaderButton';
@@ -14,7 +14,8 @@ export default class ICBase extends React.PureComponent {
             headerStyle: Object.assign({
                 height: 44,
                 backgroundColor: '#fff',
-                borderBottomWidth: 0,
+                borderBottomWidth: StyleSheet.hairlineWidth,
+                borderBottomColor: '#F0F0F0',
                 shadowOpacity: 0,
                 elevation: 0,
             }, navigation.getParam('headerStyle'), params.headerStyle),
@@ -132,7 +133,7 @@ export default class ICBase extends React.PureComponent {
                 />
                 {this.renderHeader()}
                 <View
-                    style={[{flex: 1, backgroundColor: this.#style.safeAreaBackgroundColor}, this.props.contentStyle]}>
+                    style={[{flex: 1, backgroundColor: this.#style.contentBackgroundColor}, this.props.contentStyle]}>
                     {this.renderView()}
                 </View>
             </SafeAreaView>
@@ -263,6 +264,15 @@ export default class ICBase extends React.PureComponent {
         return false;
 
     };
+
+    openURL(url) {
+
+        if (url.indexOf('http://') == 0 || url.indexOf('https://') == 0) {
+            this.pushView('ICWebViewScreen', {uri: url});
+            return;
+        }
+        Linking.openURL(url);
+    }
 
     componentWillUnmount(): void {
         if (this.#time && this.#time.length > 0) {

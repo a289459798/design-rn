@@ -27,8 +27,11 @@ export default class ICText extends React.PureComponent<TextProps, any> {
                 }
                 this.props.onPress && this.props.onPress(e);
             }}
-            style={{color: this.props.gray ? ICColor.gray : this.props.light ? ICColor.linghtGray : ICColor.darkGray}}
-            {...this.props}>
+            allowFontScaling={false}
+            pointerEvents={'none'}
+            {...this.props}
+            style={[{color: this.props.light ? ICColor.lightGray : this.props.gray ? ICColor.gray : ICColor.darkGray}, this.props.style]}
+        >
             {this.props.children}
         </Text>;
     }

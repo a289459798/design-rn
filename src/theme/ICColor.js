@@ -5,7 +5,7 @@ export default {
     white: '#FFF',
     gray: '#666',
     darkGray: '#333',
-    linghtGray: '#999',
+    lightGray: '#999',
     warring: '#',
     error: 'red',
 };

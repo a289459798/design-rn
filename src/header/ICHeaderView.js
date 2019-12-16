@@ -16,6 +16,7 @@ export default class ICHeaderView extends React.PureComponent {
                 flexDirection: 'row',
                 alignItems: 'center',
                 justifyContent: 'space-between',
+                paddingHorizontal: ICFont.f10
             }, this.props.style]}>
                 {this.props.leftButtons ?
                     <ICHeaderButton items={this.props.leftButtons} style={this.props.leftStyle}/>

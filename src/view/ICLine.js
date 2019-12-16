@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
 export default class ICLine extends React.PureComponent<Props, any> {
 
@@ -15,13 +15,13 @@ export default class ICLine extends React.PureComponent<Props, any> {
     };
 
     render() {
-        let style = {color: '#F0F0F0'};
+        let style = {backgroundColor: '#F0F0F0'};
         if (this.props.vertical) {
             style.width = StyleSheet.hairlineWidth;
         } else {
             style.height = StyleSheet.hairlineWidth;
         }
         return <View
-            {...this.props} style={[style, ...this.props.style]}/>;
+            {...this.props} style={[style, this.props.style]}/>;
     }
 }
