@@ -1,14 +1,16 @@
 import * as React from 'react';
-import WebView from 'react-native-webview';
+import WebView, {WebViewProps} from 'react-native-webview';
 
-export default class ICWebView extends React.PureComponent {
+export default class ICWebView extends WebView<WebViewProps> {
 
-    render() {
-        return <WebView
-            originWhitelist={['*']}
-            domStorageEnabled={true}
-            javaScriptEnabled={true}
-            applicationNameForUserAgent={'ichongapp'}
-        />;
-    }
+    // render() {
+    //     return <WebView
+    //         originWhitelist={['*']}
+    //         domStorageEnabled={true}
+    //         javaScriptEnabled={true}
+    //         applicationNameForUserAgent={'ichongapp'}
+    //         useWebKit={true}
+    //         {...this.props}
+    //     />;
+    // }
 }

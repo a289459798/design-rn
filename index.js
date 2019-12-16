@@ -18,6 +18,7 @@ import ICScreen from './src/theme/ICScreen';
 import ICColor from './src/theme/ICColor';
 import ICSplashScreen from './src/splashscreen/ICSplashScreen';
 import ICWebView from './src/webview/ICWebView';
+import ICWebViewComponent from './src/webview/ICWebViewComponent';
 import ICBase from './src/base/ICBase';
 import ICGuide from './src/guide/ICGuide';
 import ICImageBrowser from './src/image/ICImageBrowser';
@@ -56,4 +57,5 @@ export {
     ICHeaderTitle,
     ICLine,
     ICRadius,
+    ICWebViewComponent,
 };

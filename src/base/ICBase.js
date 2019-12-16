@@ -268,7 +268,7 @@ export default class ICBase extends React.PureComponent {
     openURL(url) {
 
         if (url.indexOf('http://') == 0 || url.indexOf('https://') == 0) {
-            this.pushView('ICWebViewScreen', {uri: url});
+            this.pushView('WebView', {uri: url});
             return;
         }
         Linking.openURL(url);
