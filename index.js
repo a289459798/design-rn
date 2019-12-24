@@ -31,6 +31,7 @@ import ICRadius from './src/radius/ICRadius';
 import ICBottomSheet from './src/modal/ICBottomSheet';
 import ICSlideslipView from './src/view/ICSlideslipView';
 import ICSlideslipRow from './src/view/ICSlideslipRow';
+import ICModal from './src/modal/ICModal';
 
 export {
     ICText,
@@ -66,4 +67,5 @@ export {
     ICBottomSheet,
     ICSlideslipView,
     ICSlideslipRow,
+    ICModal,
 };
