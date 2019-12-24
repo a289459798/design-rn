@@ -16,17 +16,27 @@ export default class ICHeaderView extends React.PureComponent {
                 flexDirection: 'row',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                paddingHorizontal: ICFont.f10
+                paddingHorizontal: ICFont.f10,
             }, this.props.style]}>
                 {this.props.leftButtons ?
                     <ICHeaderButton items={this.props.leftButtons} style={this.props.leftStyle}/>
-                    : this.props.leftComponent ? this.props.leftComponent : null}
-                {this.props.centerComponent ? this.props.centerComponent :
-                    <View style={[{flex: 1, backgroundColor: 'black', fontSize: ICFont.f16}, this.props.centerStyle]}>
-
-                    </View>}
+                    : this.props.leftComponent ? this.props.leftComponent : <View/>}
+                {this.props.centerComponent || this.props.title ?
+                    <View style={[{
+                        flex: 1,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        position: this.props.abs ? 'absolute' : '',
+                        left: 0,
+                        right: 0,
+                    }, this.props.centerStyle]}>
+                        {this.props.centerComponent ||
+                        <ICText style={{fontSize: ICFont.f16}}>
+                            {this.props.title}
+                        </ICText>}
+                    </View> : null}
                 {this.props.rightButtons ?
-                    <ICHeaderButton items={this.props.rightButtons} style={this.props.rightStyle}/>
+                    <ICHeaderButton items={this.props.rightButtons} style={[this.props.rightStyle]}/>
                     : this.props.rightComponent ? this.props.rightComponent : null}
             </View>
         );

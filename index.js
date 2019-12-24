@@ -29,6 +29,8 @@ import ICHeaderButton from './src/header/ICHeaderButton';
 import ICLine from './src/view/ICLine';
 import ICRadius from './src/radius/ICRadius';
 import ICBottomSheet from './src/modal/ICBottomSheet';
+import ICSlideslipView from './src/view/ICSlideslipView';
+import ICSlideslipRow from './src/view/ICSlideslipRow';
 
 export {
     ICText,
@@ -62,4 +64,6 @@ export {
     ICRadius,
     ICWebViewComponent,
     ICBottomSheet,
+    ICSlideslipView,
+    ICSlideslipRow,
 };

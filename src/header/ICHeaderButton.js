@@ -20,7 +20,7 @@ export default class ICHeaderTitleICHeaderButton extends React.PureComponent {
                                 onPress={v.onPress}
                                 eventId={v.eventId}
                                 key={k}><View style={{padding: ICFont.f5}}>
-                                <v.icon name={v.name} size={v.size ? ICFont.calc(v.size) : ICFont.calc(24)}/>
+                                <v.icon name={v.name} color={v.color} size={v.size ? ICFont.calc(v.size) : ICFont.calc(24)}/>
                             </View></ICTouchableNativeFeedback>;
                         } else if (v.text) {
                             return <ICTouchableNativeFeedback
