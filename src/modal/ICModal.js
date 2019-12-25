@@ -22,7 +22,7 @@ export default class ICModal extends React.PureComponent {
                 onBackdropPress={() => this.hide()}
                 {...this.props}
             >
-                <View style={{backgroundColor: '#fff'}}>
+                <View style={[{backgroundColor: '#fff'}, this.props.style]}>
                     {this.props.children}
                 </View>
             </Modal>);

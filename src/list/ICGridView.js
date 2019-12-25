@@ -11,7 +11,6 @@ export default class ICGridView extends React.PureComponent<FlatListProps, any> 
                 justifyContent: 'space-between',
                 ...this.props.columnWrapperStyle,
             }}
-            columnWrapperStyle={this.props.column}
         >
 
         </ICListView>;
