@@ -7,6 +7,9 @@ export default class ICInput extends React.PureComponent<InputProps, any> {
 
     render() {
         return <Input
-            {...this.props} />;
+            underlineColorAndroid={'transparent'}
+            {...this.props}
+            inputContainerStyle={[{borderBottomWidth: 0}, this.props.inputContainerStyle]}
+        />;
     }
 }

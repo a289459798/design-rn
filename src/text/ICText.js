@@ -21,16 +21,16 @@ export default class ICText extends React.PureComponent<TextProps, any> {
 
     render() {
         return <Text
+            allowFontScaling={false}
+            pointerEvents={!this.props.onPress ? 'none' : null}
+            {...this.props}
+            style={[{color: this.props.light ? ICColor.lightGray : this.props.gray ? ICColor.gray : ICColor.darkGray}, this.props.style]}
             onPress={(e) => {
                 if (this.props.eventId) {
                     Analytics.event(this.props.eventId);
                 }
                 this.props.onPress && this.props.onPress(e);
             }}
-            allowFontScaling={false}
-            pointerEvents={'none'}
-            {...this.props}
-            style={[{color: this.props.light ? ICColor.lightGray : this.props.gray ? ICColor.gray : ICColor.darkGray}, this.props.style]}
         >
             {this.props.children}
         </Text>;
