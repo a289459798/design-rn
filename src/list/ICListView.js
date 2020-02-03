@@ -45,6 +45,7 @@ export default class ICListView extends React.PureComponent<FlatListProps, any> 
 
     render() {
         return <FlatList
+            ref={(e) => this.ref = e}
             ListHeaderComponent={() => this._renderHeader()}
             ListFooterComponent={() => this._renderFooter(this.props.loading, this.props.hasMore)}
             ItemSeparatorComponent={this.props.renderSeparator}
