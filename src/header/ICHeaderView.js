@@ -7,17 +7,23 @@ import ICHeaderButton from './ICHeaderButton';
 
 export default class ICHeaderView extends React.PureComponent {
 
+    setNativeProps = (nativeProps) => {
+        this._view.setNativeProps(nativeProps);
+    };
+
     render() {
         return (
-            <View style={[{
-                width: '100%',
-                height: 44,
-                backgroundColor: '#fff',
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                paddingHorizontal: ICFont.f10,
-            }, this.props.style]}>
+            <View
+                ref={e => this._view = e}
+                style={[{
+                    width: '100%',
+                    height: 44,
+                    backgroundColor: '#fff',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    paddingHorizontal: ICFont.f10,
+                }, this.props.style]}>
                 {this.props.leftButtons ?
                     <ICHeaderButton items={this.props.leftButtons} style={this.props.leftStyle}/>
                     : this.props.leftComponent ? this.props.leftComponent : <View/>}
