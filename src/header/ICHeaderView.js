@@ -34,7 +34,7 @@ export default class ICHeaderView extends React.PureComponent {
                             flex: 1,
                             alignItems: 'center',
                             justifyContent: 'center',
-                            position: this.props.abs ? 'absolute' : '',
+                            position: this.props.abs ? 'absolute' : null,
                             left: 0,
                             right: 0,
                         }, this.props.centerStyle]}>

@@ -5,6 +5,7 @@ import ICHeaderView from '../header/ICHeaderView';
 import ICHeaderButton from '../header/ICHeaderButton';
 import ICHeaderTitle from '../header/ICHeaderTitle';
 import ICFont from '../theme/ICFont';
+import Toast from '@ichong/react-native-toast'
 
 export default class ICBase extends React.PureComponent {
 
@@ -247,8 +248,9 @@ export default class ICBase extends React.PureComponent {
 
     onBackButtonPressAndroid = () => {
         let nav = this.props.navigation.getParam('nav');
+
         if (nav) {
-            if (nav.routes[nav.index].routes.length == 1) {
+            if (nav.routes.length == 1) {
                 if (this.lastBackPressed && (this.lastBackPressed + 2000 >= Date.now())) {
 
                     BackHandler.exitApp();
