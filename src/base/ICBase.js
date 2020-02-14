@@ -19,7 +19,7 @@ export default class ICBase extends React.PureComponent {
                 shadowOpacity: 0,
                 elevation: 0,
             }, navigation.getParam('headerStyle'), params.headerStyle),
-            headerRight: navigation.getParam('headerRight') || params.headerRight,
+            headerRight: <View style={{paddingRight: 10}}>{navigation.getParam('headerRight') || params.headerRight}</View>,
             headerLeft: navigation.getParam('headerLeft') || params.headerLeft,
             title: navigation.getParam('title') || params.title,
             headerTitleStyle: Object.assign({
@@ -119,6 +119,10 @@ export default class ICBase extends React.PureComponent {
         };
     }
 
+    getContentStyle() {
+        return {};
+    }
+
     renderHeader() {
         return null;
     }
@@ -133,7 +137,7 @@ export default class ICBase extends React.PureComponent {
                 />
                 {this.renderHeader()}
                 <View
-                    style={[{flex: 1, backgroundColor: this.#style.contentBackgroundColor}, this.props.contentStyle]}>
+                    style={[{flex: 1, backgroundColor: this.#style.contentBackgroundColor}, this.getContentStyle()]}>
                     {this.renderView()}
                 </View>
             </SafeAreaView>

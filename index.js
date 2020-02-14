@@ -32,6 +32,7 @@ import ICBottomSheet from './src/modal/ICBottomSheet';
 import ICSlideslipView from './src/view/ICSlideslipView';
 import ICSlideslipRow from './src/view/ICSlideslipRow';
 import ICModal from './src/modal/ICModal';
+import ICActionSheet from './src/modal/ICActionSheet';
 
 export {
     ICText,
@@ -68,4 +69,5 @@ export {
     ICSlideslipView,
     ICSlideslipRow,
     ICModal,
+    ICActionSheet,
 };
