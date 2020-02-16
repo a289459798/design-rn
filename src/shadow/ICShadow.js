@@ -12,8 +12,17 @@ export default class ICShadow extends React.PureComponent<ViewProps, any> {
                     style={[this.props.style, {overflow: 'visible'}]}>
                     {this.props.children}
 
-                    <Image source={require('../images/yy.9.png')}
-                           style={{left: -4, top: -4, right: -4, bottom: -4, position: 'absolute', zIndex: -1}}/>
+                    <View style={{left: -4, top: -4, right: -4, bottom: -4, position: 'absolute', zIndex: -1}}>
+                        <Image source={{'uri': 'ic_yy'}}
+                               style={{
+                                   resizeMode: 'stretch',
+                                   position: 'absolute',
+                                   top: 0,
+                                   left: 0,
+                                   bottom: 0,
+                                   right: 0,
+                               }}/>
+                    </View>
                 </View>
             );
         }
