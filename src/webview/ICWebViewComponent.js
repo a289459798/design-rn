@@ -47,17 +47,31 @@ export default class ICWebViewComponent extends ICBase {
 
     }
 
+    getParams(key) {
+        if (this.params[key]) {
+            return this.params[key];
+        } else if (this.props[key]) {
+            return this.props[key];
+        }
+        return null;
+    }
+
+    getProps() {
+        return {};
+    }
+
     _renderWebView() {
-        if (this.params.uri) {
+        if (this.getParams('uri')) {
             return (
                 <ICWebView
                     ref="webview"
                     source={{
-                        uri: `${decodeURIComponent(this.params.uri)}${this.params.uri.indexOf('?') == -1 ? '?' : '&'}${this.getUrlParams()}`,
-                        method: this.params.method,
-                        body: this.params.body,
-                        headers: this.params.headers,
+                        uri: `${decodeURIComponent(this.getParams('uri'))}${this.getParams('uri').indexOf('?') == -1 ? '?' : '&'}${this.getUrlParams()}`,
+                        method: this.getParams('method'),
+                        body: this.getParams('body'),
+                        headers: this.getParams('headers'),
                     }}
+                    textZoom={100}
                     onNavigationStateChange={this.onNavigationStateChange}
                     style={{flex: 1}}
                     decelerationRate="normal"
@@ -69,29 +83,31 @@ export default class ICWebViewComponent extends ICBase {
                             return false;
                         }
                     }}
+                    domStorageEnabled={true}
+                    javaScriptEnabled={true}
                     startInLoadingState={true}
                     onLoadStart={() => this.loaded = false}
 
                     onLoadEnd={() => {
                         this.loaded = true;
-                        console.log(this.refs);
                         this.refs.webview.injectJavaScript('document.querySelector(".handleForm' +
                             ' .header").style.backgroundSize = \'100%\'');
                     }}
                     onMessage={(e) => {
                         this.onMessage(e);
                     }}
+                    {...this.getProps()}
                 >
 
                 </ICWebView>
             );
-        } else if (this.params.html || this.props.html) {
+        } else if (this.getParams('html')) {
 
             let html = `
                 <html><head>
 <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
 <style> img {max-width: 100%}</style>
-</head><body>${this.params.html || this.props.html}</body></html>
+</head><body>${this.getParams('html')}</body></html>
             `;
             return (
                 <ICWebView
@@ -108,9 +124,13 @@ export default class ICWebViewComponent extends ICBase {
                             return false;
                         }
                     }}
+                    useWebKit={true}
+                    domStorageEnabled={true}
+                    javaScriptEnabled={true}
                     onMessage={(e) => {
                         this.onMessage(e);
                     }}
+                    {...this.getProps()}
                 >
 
                 </ICWebView>
@@ -170,7 +190,7 @@ export default class ICWebViewComponent extends ICBase {
             canGoBack: navState.canGoBack,
             canGoForward: navState.canGoForward,
         });
-        this.setHeaderTitle(this.params.title || this.props.title || navState.title);
+        this.setHeaderTitle(this.getParams('title') || navState.title);
 
         setTimeout(() => this.refs.webview && this.refs.webview.injectJavaScript('document.querySelector(".handleForm' +
             ' .header").style.backgroundSize = \'100%\''), 1000);
