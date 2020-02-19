@@ -1,8 +1,8 @@
-import {ImageProps, Image} from 'react-native-elements';
+import {ImageProps} from 'react-native-elements';
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import FastImage from 'react-native-fast-image';
-import {View} from 'react-native';
+import {View, Image} from 'react-native';
 
 export default class ICImage extends React.PureComponent<ImageProps, any> {
 
@@ -14,17 +14,18 @@ export default class ICImage extends React.PureComponent<ImageProps, any> {
     }
 
     render() {
-        if (this.props.useNative !== false) {
+
+        if ((typeof this.props.source != 'number') && this.props.useNative !== false) {
             return (
                 <View>
                     {!this.state.load && this.props.defaultSource &&
                     <View style={[this.props.style, {position: 'absolute', zIndex: 9, overflow: 'hidden'}]}>
-                        <Image resizeMode={'center'} {...this.props}
-                               source={this.props.defaultSource}/>
+                        <Image  {...this.props}
+                                source={this.props.defaultSource}/>
                     </View>}
 
                     <FastImage onLoad={() => {
-                        this.setState({load: true})
+                        this.setState({load: true});
                     }} {...this.props}/>
                 </View>
             );
