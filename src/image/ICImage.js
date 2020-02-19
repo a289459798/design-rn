@@ -18,7 +18,7 @@ export default class ICImage extends React.PureComponent<ImageProps, any> {
             return (
                 <View>
                     {!this.state.load && this.props.defaultSource &&
-                    <View style={[this.props.style, {position: 'absolute', zIndex: 9}]}>
+                    <View style={[this.props.style, {position: 'absolute', zIndex: 9, overflow: 'hidden'}]}>
                         <Image resizeMode={'center'} {...this.props}
                                source={this.props.defaultSource}/>
                     </View>}
