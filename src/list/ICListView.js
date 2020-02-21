@@ -3,25 +3,21 @@ import {FlatList, FlatListProps, View, Text, ActivityIndicator, RefreshControl} 
 
 export default class ICListView extends React.PureComponent<FlatListProps, any> {
 
-    _renderFooter(loading, hasMore) {
-        if (loading && hasMore) {
-            return (
-                <View style={{alignItems: 'center', justifyContent: 'center', paddingTop: 10, paddingBottom: 10}}>
-
-                    <View style={{flexDirection: 'row'}}>
-                        <ActivityIndicator
-                            animating={true}
-                            size="small"
-                        />
-                        <View style={{justifyContent: 'center', marginLeft: 5}}>
-                            <Text style={{fontSize: 12, color: '#666'}}>正在加载更多</Text>
-                        </View>
+    _renderFooter() {
+        let {loading, hasMore} = this.props;
+        return this.props.renderFooter || (
+            <View style={{alignItems: 'center', justifyContent: 'center', paddingTop: 10, paddingBottom: 10}}>
+                <View style={{flexDirection: 'row'}}>
+                    {loading ? (<ActivityIndicator size="small"/>) : null}
+                    <View style={{justifyContent: 'center', marginLeft: 5}}>
+                        <Text style={{
+                            fontSize: 12,
+                            color: '#666'
+                        }}>{loading ? '正在加载更多' : hasMore ? '已经到底了' : null}</Text>
                     </View>
                 </View>
-            );
-        }
-        return this.props.renderFooter ? this.props.renderFooter() : null;
-
+            </View>
+        );
     }
 
     _renderHeader() {
@@ -47,7 +43,7 @@ export default class ICListView extends React.PureComponent<FlatListProps, any> 
         return <FlatList
             ref={(e) => this.ref = e}
             ListHeaderComponent={() => this._renderHeader()}
-            ListFooterComponent={() => this._renderFooter(this.props.loading, this.props.hasMore)}
+            ListFooterComponent={() => this._renderFooter()}
             ItemSeparatorComponent={this.props.renderSeparator}
             onEndReached={() => this.props.hasMore && !this.props.loading ? this.props.onLoadMore() : null}
             onEndReachedThreshold={0.5}
