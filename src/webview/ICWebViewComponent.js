@@ -44,6 +44,8 @@ export default class ICWebViewComponent extends ICBase {
             canGoForward: false,
             webViewTitle: '',
             progress: 0,
+            showShare: false,
+            showBottom: true,
         };
 
         this.showBack = true;
@@ -76,7 +78,7 @@ export default class ICWebViewComponent extends ICBase {
 
     injectedJavaScript() {
         let js = '';
-        let fn = this.registerFunctionNames();
+        let fn = this._getFunctionName();
         js += `window.${this.getNamespace()} = {};`;
         for (let k in fn) {
             js += `
@@ -86,12 +88,35 @@ export default class ICWebViewComponent extends ICBase {
             `;
         }
         js += this.runJs();
+        js += '';
         return js;
     }
 
     runJs() {
         return '';
 
+    }
+
+    _getFunctionName() {
+        return {
+            showShare: (data) => {
+                this.setState({showShare: !!data});
+            },
+            setTitle: (title) => {
+                this.setHeaderTitle(title);
+            },
+            showBottom: (data) => {
+                this.setState({showBottom: !!data});
+            },
+            hideNav: () => {
+                this.setNavigationOptions({
+                    headerStyle: {
+                        height: 0,
+                    },
+                });
+            },
+            ...this.registerFunctionNames(),
+        };
     }
 
     registerFunctionNames() {
@@ -155,7 +180,7 @@ export default class ICWebViewComponent extends ICBase {
                     onMessage={(e) => {
                         try {
                             let json = JSON.parse(e.nativeEvent.data);
-                            let fn = this.registerFunctionNames();
+                            let fn = this._getFunctionName();
                             if (fn && fn[json.type]) {
                                 fn[json.type](json.data);
                             } else {
@@ -215,7 +240,7 @@ export default class ICWebViewComponent extends ICBase {
             <View style={{flex: 1}}>
                 {this._renderWebView()}
 
-                {this.getParams('uri') && <View ref={(r) => this.back = r} style={{
+                {this.getParams('uri') && this.state.showBottom && <View ref={(r) => this.back = r} style={{
                     height: ICScreen.iphonx ? 79 : ICScreen.calc(40),
                     backgroundColor: '#fff',
                     borderTopColor: '#e2e2e2',
@@ -243,17 +268,18 @@ export default class ICWebViewComponent extends ICBase {
 
                         <Icon style={{padding: 10}} onPress={() => {
                             this.webview.reload();
-
                         }} name={'refresh'} color={'#666'} size={22}/>
 
                         <Icon style={{padding: 10}} onPress={() => {
-                            Share.share({
-                                url: this.state.url,
-                                message: this.getParams('title'),
-                                title: this.getParams('title'),
-                            });
+                            if (this.state.showShare) {
+                                Share.share({
+                                    url: this.state.url,
+                                    message: this.getParams('title'),
+                                    title: this.getParams('title'),
+                                });
+                            }
 
-                        }} name={'share-variant'} color={'#666'} size={20}/>
+                        }} name={'share-variant'} color={this.state.showShare ? '#666' : '#ddd'} size={20}/>
 
                     </View>
                 </View>}
