@@ -70,11 +70,39 @@ export default class ICWebViewComponent extends ICBase {
         return {};
     }
 
+    getNamespace() {
+        return 'ichong';
+    }
+
+    injectedJavaScript() {
+        let js = '';
+        let fn = this.registerFunctionNames();
+        js += `window.${this.getNamespace()} = {};`;
+        for (let k in fn) {
+            js += `
+                window.${this.getNamespace()}.${k} = function(data) {
+                    window.ReactNativeWebView.postMessage(JSON.stringify({type: '${k}',data: data}));
+                }
+            `;
+        }
+        js += this.runJs();
+        return js;
+    }
+
+    runJs() {
+        return '';
+
+    }
+
+    registerFunctionNames() {
+        return {};
+    }
+
     _renderWebView() {
         if (this.getParams('uri')) {
             return (
                 <ICWebView
-                    ref="webview"
+                    ref={r => this.webview = r}
                     source={{
                         uri: `${decodeURIComponent(this.getParams('uri'))}${this.getParams('uri').indexOf('?') == -1 ? '?' : '&'}${this.getUrlParams()}`,
                         method: this.getParams('method') || '',
@@ -113,6 +141,7 @@ export default class ICWebViewComponent extends ICBase {
                                 }}/>
                         </View>);
                     }}
+                    injectedJavaScript={this.injectedJavaScript()}
                     onLoadProgress={({nativeEvent}) => {
                         this.progress && this.progress.setNativeProps({
                             style: {width: nativeEvent.progress * 100 + '%'},
@@ -120,11 +149,21 @@ export default class ICWebViewComponent extends ICBase {
                     }}
                     onLoadEnd={() => {
                         this.loaded = true;
-                        this.refs.webview.injectJavaScript('document.querySelector(".handleForm' +
+                        this.webview.injectJavaScript('document.querySelector(".handleForm' +
                             ' .header").style.backgroundSize = \'100%\'');
                     }}
                     onMessage={(e) => {
-                        this.onMessage(e);
+                        try {
+                            let json = JSON.parse(e.nativeEvent.data);
+                            let fn = this.registerFunctionNames();
+                            if (fn && fn[json.type]) {
+                                fn[json.type](json.data);
+                            } else {
+                                this.onMessage(e);
+                            }
+                        } catch (error) {
+                            this.onMessage(e);
+                        }
                     }}
                     {...this.getProps()}
                 >
@@ -141,7 +180,7 @@ export default class ICWebViewComponent extends ICBase {
             `;
             return (
                 <ICWebView
-                    ref="webview"
+                    ref={r => this.webview = r}
                     source={{html: html, baseUrl: 'about:blank'}}
                     onNavigationStateChange={this.onNavigationStateChange}
                     style={{flex: 1}}
@@ -192,15 +231,20 @@ export default class ICWebViewComponent extends ICBase {
 
                         <Icon style={{padding: 10}} onPress={() => {
                             if (this.state.canGoBack) {
-                                this.refs.webview.goBack();
+                                this.webview.goBack();
                             }
                         }} name={'chevron-left'} color={this.state.canGoBack ? '#666' : '#ddd'} size={24}/>
 
                         <Icon style={{padding: 10}} onPress={() => {
                             if (this.state.canGoForward) {
-                                this.refs.webview.goForward();
+                                this.webview.goForward();
                             }
                         }} name={'chevron-right'} color={this.state.canGoForward ? '#666' : '#ddd'} size={24}/>
+
+                        <Icon style={{padding: 10}} onPress={() => {
+                            this.webview.reload();
+
+                        }} name={'refresh'} color={'#666'} size={22}/>
 
                         <Icon style={{padding: 10}} onPress={() => {
                             Share.share({
@@ -211,10 +255,6 @@ export default class ICWebViewComponent extends ICBase {
 
                         }} name={'share-variant'} color={'#666'} size={20}/>
 
-                        <Icon style={{padding: 10}} onPress={() => {
-                            this.refs.webview.reload();
-
-                        }} name={'refresh'} color={'#666'} size={22}/>
                     </View>
                 </View>}
             </View>
@@ -232,7 +272,7 @@ export default class ICWebViewComponent extends ICBase {
         });
         this.setHeaderTitle(navState.title);
 
-        setTimeout(() => this.refs.webview && this.refs.webview.injectJavaScript('document.querySelector(".handleForm' +
+        setTimeout(() => this.webview && this.webview.injectJavaScript('document.querySelector(".handleForm' +
             ' .header").style.backgroundSize = \'100%\''), 1000);
 
     };
