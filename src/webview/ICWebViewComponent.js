@@ -17,6 +17,8 @@ import ICBase from '../base/ICBase';
 import ICWebView from './ICWebView';
 import ICScreen from '../theme/ICScreen';
 import ICImage from '../image/ICImage';
+import ICTouchableWithoutFeedback from '../touchable/ICTouchableWithoutFeedback';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class ICWebViewComponent extends ICBase {
 
@@ -24,6 +26,13 @@ export default class ICWebViewComponent extends ICBase {
 
         return ICBase.navigationOptions({navigation}, {
             title: navigation.state.params.title || '加载中...',
+            headerLeft: <Icon name={'close'} color={'#333'} size={24}
+                              onPress={() => {
+                                  let status = navigation.state.params.onLeftPress && navigation.state.params.onLeftPress();
+                                  if (!status) {
+                                      navigation.pop();
+                                  }
+                              }}/>,
         });
     };
 
@@ -67,9 +76,9 @@ export default class ICWebViewComponent extends ICBase {
                     ref="webview"
                     source={{
                         uri: `${decodeURIComponent(this.getParams('uri'))}${this.getParams('uri').indexOf('?') == -1 ? '?' : '&'}${this.getUrlParams()}`,
-                        method: this.getParams('method'),
+                        method: this.getParams('method') || '',
                         body: this.getParams('body'),
-                        headers: this.getParams('headers'),
+                        headers: this.getParams('headers') || {},
                     }}
                     textZoom={100}
                     onNavigationStateChange={this.onNavigationStateChange}
@@ -147,35 +156,30 @@ export default class ICWebViewComponent extends ICBase {
                 {this._renderWebView()}
 
                 {this.state.canGoBack || this.state.canGoForward ? <View ref={(r) => this.back = r} style={{
-                    height: ICScreen.iphonx ? 79 : 40,
+                    height: ICScreen.iphonx ? 79 : ICScreen.calc(40),
                     backgroundColor: '#fff',
                     borderTopColor: '#e2e2e2',
                     borderTopWidth: StyleSheet.hairlineWidth,
                 }}>
                     <View
-                        style={{height: 40, alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}}>
-                        <TouchableWithoutFeedback
-                            hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}
-                            onPress={() => {
-                                if (this.state.canGoBack) {
-                                    this.refs.webview.goBack();
-                                }
-                            }}>
-                            <View style={{marginRight: 80, padding: 10}}>
-                                <ICImage source={{}}/>
-                            </View>
-                        </TouchableWithoutFeedback>
-                        <TouchableWithoutFeedback
-                            hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}
-                            onPress={() => {
-                                if (this.state.canGoForward) {
-                                    this.refs.webview.goForward();
-                                }
-                            }}>
-                            <View style={{padding: 10}}>
-                                <ICImage source={{}}/>
-                            </View>
-                        </TouchableWithoutFeedback>
+                        style={{
+                            height: ICScreen.calc(40),
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            flexDirection: 'row',
+                        }}>
+
+                        <Icon style={{marginRight: ICScreen.calc(100), padding: 10}} onPress={() => {
+                            if (this.state.canGoBack) {
+                                this.refs.webview.goBack();
+                            }
+                        }} name={'chevron-left'} color={this.state.canGoBack ? '#333' : '#ddd'} size={24}/>
+
+                        <Icon style={{padding: 10}} onPress={() => {
+                            if (this.state.canGoForward) {
+                                this.refs.webview.goForward();
+                            }
+                        }} name={'chevron-right'} color={this.state.canGoForward ? '#333' : '#ddd'} size={24}/>
                     </View>
                 </View> : null}
             </View>
