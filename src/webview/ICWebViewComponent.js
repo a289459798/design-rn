@@ -16,6 +16,7 @@ import ICBase from '../base/ICBase';
 import ICWebView from './ICWebView';
 import ICScreen from '../theme/ICScreen';
 import ICImage from '../image/ICImage';
+import ICGradientView from '../gradient/ICGradientView';
 import ICTouchableWithoutFeedback from '../touchable/ICTouchableWithoutFeedback';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -42,6 +43,7 @@ export default class ICWebViewComponent extends ICBase {
             canGoBack: false,
             canGoForward: false,
             webViewTitle: '',
+            progress: 0,
         };
 
         this.showBack = true;
@@ -95,7 +97,27 @@ export default class ICWebViewComponent extends ICBase {
                     javaScriptEnabled={true}
                     startInLoadingState={true}
                     onLoadStart={() => this.loaded = false}
-
+                    renderLoading={(res) => {
+                        return (<View style={{width: '100%', height: ICScreen.calc(2), position: 'absolute', top: 0}}>
+                            <View style={{width: '100%', height: '100%', backgroundColor: '#ddd'}}/>
+                            <ICGradientView
+                                ref={r => this.progress = r}
+                                colors={['#8089FF', '#7089FF']}
+                                end={{x: 1, y: 0}}
+                                style={{
+                                    position: 'absolute',
+                                    left: 0,
+                                    width: 0,
+                                    height: '100%',
+                                    zIndex: 9,
+                                }}/>
+                        </View>);
+                    }}
+                    onLoadProgress={({nativeEvent}) => {
+                        this.progress && this.progress.setNativeProps({
+                            style: {width: nativeEvent.progress * 100 + '%'},
+                        });
+                    }}
                     onLoadEnd={() => {
                         this.loaded = true;
                         this.refs.webview.injectJavaScript('document.querySelector(".handleForm' +
@@ -181,7 +203,6 @@ export default class ICWebViewComponent extends ICBase {
                         }} name={'chevron-right'} color={this.state.canGoForward ? '#666' : '#ddd'} size={24}/>
 
                         <Icon style={{padding: 10}} onPress={() => {
-                            console.log(this.refs.webview);
                             Share.share({
                                 url: this.state.url,
                                 message: this.getParams('title'),
