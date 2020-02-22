@@ -8,8 +8,7 @@ import React, {
 } from 'react';
 import {
     StyleSheet,
-    WebView,
-    View, Text, TouchableWithoutFeedback, PanResponder, StatusBar,
+    View, Text, TouchableWithoutFeedback, PanResponder, StatusBar, Share,
 } from 'react-native';
 
 
@@ -155,7 +154,7 @@ export default class ICWebViewComponent extends ICBase {
             <View style={{flex: 1}}>
                 {this._renderWebView()}
 
-                {this.state.canGoBack || this.state.canGoForward ? <View ref={(r) => this.back = r} style={{
+                {this.getParams('uri') && <View ref={(r) => this.back = r} style={{
                     height: ICScreen.iphonx ? 79 : ICScreen.calc(40),
                     backgroundColor: '#fff',
                     borderTopColor: '#e2e2e2',
@@ -165,23 +164,38 @@ export default class ICWebViewComponent extends ICBase {
                         style={{
                             height: ICScreen.calc(40),
                             alignItems: 'center',
-                            justifyContent: 'center',
+                            justifyContent: 'space-between',
                             flexDirection: 'row',
                         }}>
 
-                        <Icon style={{marginRight: ICScreen.calc(100), padding: 10}} onPress={() => {
+                        <Icon style={{padding: 10}} onPress={() => {
                             if (this.state.canGoBack) {
                                 this.refs.webview.goBack();
                             }
-                        }} name={'chevron-left'} color={this.state.canGoBack ? '#333' : '#ddd'} size={24}/>
+                        }} name={'chevron-left'} color={this.state.canGoBack ? '#666' : '#ddd'} size={24}/>
 
                         <Icon style={{padding: 10}} onPress={() => {
                             if (this.state.canGoForward) {
                                 this.refs.webview.goForward();
                             }
-                        }} name={'chevron-right'} color={this.state.canGoForward ? '#333' : '#ddd'} size={24}/>
+                        }} name={'chevron-right'} color={this.state.canGoForward ? '#666' : '#ddd'} size={24}/>
+
+                        <Icon style={{padding: 10}} onPress={() => {
+                            console.log(this.refs.webview);
+                            Share.share({
+                                url: this.state.url,
+                                message: this.getParams('title'),
+                                title: this.getParams('title'),
+                            });
+
+                        }} name={'share-variant'} color={'#666'} size={20}/>
+
+                        <Icon style={{padding: 10}} onPress={() => {
+                            this.refs.webview.reload();
+
+                        }} name={'refresh'} color={'#666'} size={22}/>
                     </View>
-                </View> : null}
+                </View>}
             </View>
         );
 
@@ -193,8 +207,9 @@ export default class ICWebViewComponent extends ICBase {
         this.setState({
             canGoBack: navState.canGoBack,
             canGoForward: navState.canGoForward,
+            url: navState.url,
         });
-        this.setHeaderTitle(this.getParams('title') || navState.title);
+        this.setHeaderTitle(navState.title);
 
         setTimeout(() => this.refs.webview && this.refs.webview.injectJavaScript('document.querySelector(".handleForm' +
             ' .header").style.backgroundSize = \'100%\''), 1000);
