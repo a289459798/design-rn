@@ -131,7 +131,7 @@ export default class ICWebViewComponent extends ICBase {
                     source={{
                         uri: `${decodeURIComponent(this.getParams('uri'))}${this.getParams('uri').indexOf('?') == -1 ? '?' : '&'}${this.getUrlParams()}`,
                         method: this.getParams('method') || '',
-                        body: this.getParams('body'),
+                        body: this.getParams('body') || '',
                         headers: this.getParams('headers') || {},
                     }}
                     textZoom={100}
