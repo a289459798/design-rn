@@ -131,8 +131,7 @@ export default class ICWebViewComponent extends ICBase {
                 <ICWebView
                     ref={r => this.webview = r}
                     source={{
-                        // uri: `${decodeURIComponent(this.getParams('uri'))}${this.getParams('uri').indexOf('?') == -1 ? '?' : '&'}${this.getUrlParams()}`,
-                        uri: `http://sddd`,
+                        uri: `${decodeURIComponent(this.getParams('uri'))}${this.getParams('uri').indexOf('?') == -1 ? '?' : '&'}${this.getUrlParams()}`,
                         method: this.getParams('method') || '',
                         body: this.getParams('body') || '',
                         headers: this.getParams('headers') || {},
