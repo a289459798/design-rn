@@ -183,22 +183,23 @@ export default class ICWebViewComponent extends ICBase {
                         this.setHeaderTitle('加载失败');
                     }}
                     renderError={(e) => {
-                        return this.renderError ? this.renderError(e) : (
+                        return (
                             <ICTouchableWithoutFeedback onPress={() => this.webview.reload()}>
-                                <View style={{
-                                    height: '100%',
-                                    backgroundColor: '#fff',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                }}>
-                                    <Icon name={'wifi-off'} size={90} color={'#999'}/>
-                                    <ICText>加载错误，点击重试</ICText>
-                                    <ICText style={{marginTop: ICFont.f10, color: '#999'}}>{e}</ICText>
-                                </View>
+                                {this.renderError ? <View pointerEvents={'box-only'}
+                                                          style={{height: '100%'}}>{this.renderError(e)}</View> :
+                                    <View style={{
+                                        height: '100%',
+                                        backgroundColor: '#fff',
+                                        alignItems: 'center',
+                                        justifyContent: 'center',
+                                    }}>
+                                        <Icon name={'wifi-off'} size={90} color={'#999'}/>
+                                        <ICText>加载错误，点击重试</ICText>
+                                        <ICText style={{marginTop: ICFont.f10, color: '#999'}}>{e}</ICText>
+                                    </View>}
                             </ICTouchableWithoutFeedback>
                         );
-                    }
-                    }
+                    }}
                     onMessage={(e) => {
                         try {
                             let json = JSON.parse(e.nativeEvent.data);
