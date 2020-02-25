@@ -2,6 +2,7 @@
  * Created by Rambo on 2016/9/14.
  */
 
+
 'use strict';
 import React, {
     Component,
@@ -19,6 +20,7 @@ import ICImage from '../image/ICImage';
 import ICGradientView from '../gradient/ICGradientView';
 import ICTouchableWithoutFeedback from '../touchable/ICTouchableWithoutFeedback';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {ICFont, ICText} from '@ichong/design-rn';
 
 export default class ICWebViewComponent extends ICBase {
 
@@ -129,7 +131,8 @@ export default class ICWebViewComponent extends ICBase {
                 <ICWebView
                     ref={r => this.webview = r}
                     source={{
-                        uri: `${decodeURIComponent(this.getParams('uri'))}${this.getParams('uri').indexOf('?') == -1 ? '?' : '&'}${this.getUrlParams()}`,
+                        // uri: `${decodeURIComponent(this.getParams('uri'))}${this.getParams('uri').indexOf('?') == -1 ? '?' : '&'}${this.getUrlParams()}`,
+                        uri: `http://sddd`,
                         method: this.getParams('method') || '',
                         body: this.getParams('body') || '',
                         headers: this.getParams('headers') || {},
@@ -177,6 +180,26 @@ export default class ICWebViewComponent extends ICBase {
                         this.webview.injectJavaScript('document.querySelector(".handleForm' +
                             ' .header").style.backgroundSize = \'100%\'');
                     }}
+                    onError={(e) => {
+                        this.setHeaderTitle('加载失败');
+                    }}
+                    renderError={(e) => {
+                        return this.renderError ? this.renderError(e) : (
+                            <ICTouchableWithoutFeedback onPress={() => this.webview.reload()}>
+                                <View style={{
+                                    height: '100%',
+                                    backgroundColor: '#fff',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                }}>
+                                    <Icon name={'wifi-off'} size={90} color={'#999'}/>
+                                    <ICText>加载错误，点击重试</ICText>
+                                    <ICText style={{marginTop: ICFont.f10, color: '#999'}}>{e}</ICText>
+                                </View>
+                            </ICTouchableWithoutFeedback>
+                        );
+                    }
+                    }
                     onMessage={(e) => {
                         try {
                             let json = JSON.parse(e.nativeEvent.data);
