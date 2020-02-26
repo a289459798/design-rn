@@ -127,15 +127,23 @@ export default class ICWebViewComponent extends ICBase {
 
     _renderWebView() {
         if (this.getParams('uri')) {
+
+            let source = {
+                uri: `${decodeURIComponent(this.getParams('uri'))}${this.getParams('uri').indexOf('?') == -1 ? '?' : '&'}${this.getUrlParams()}`,
+            };
+            if (this.getParams('method')) {
+                source.method = this.getParams('method');
+            }
+            if (this.getParams('body')) {
+                source.body = this.getParams('body');
+            }
+            if (this.getParams('headers')) {
+                source.headers = this.getParams('headers');
+            }
             return (
                 <ICWebView
                     ref={r => this.webview = r}
-                    source={{
-                        uri: `${decodeURIComponent(this.getParams('uri'))}${this.getParams('uri').indexOf('?') == -1 ? '?' : '&'}${this.getUrlParams()}`,
-                        method: this.getParams('method') || '',
-                        body: this.getParams('body') || '',
-                        headers: this.getParams('headers') || {},
-                    }}
+                    source={source}
                     textZoom={100}
                     onNavigationStateChange={this.onNavigationStateChange}
                     style={{flex: 1}}
@@ -153,6 +161,7 @@ export default class ICWebViewComponent extends ICBase {
                     startInLoadingState={true}
                     onLoadStart={() => this.loaded = false}
                     renderLoading={(res) => {
+                        console.log(111111);
                         return (<View style={{width: '100%', height: ICScreen.calc(2), position: 'absolute', top: 0}}>
                             <View style={{width: '100%', height: '100%', backgroundColor: '#ddd'}}/>
                             <ICGradientView

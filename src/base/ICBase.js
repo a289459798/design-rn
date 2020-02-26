@@ -5,7 +5,7 @@ import ICHeaderView from '../header/ICHeaderView';
 import ICHeaderButton from '../header/ICHeaderButton';
 import ICHeaderTitle from '../header/ICHeaderTitle';
 import ICFont from '../theme/ICFont';
-import Toast from '@ichong/react-native-toast'
+import Toast from '@ichong/react-native-toast';
 
 export default class ICBase extends React.PureComponent {
 
@@ -20,7 +20,8 @@ export default class ICBase extends React.PureComponent {
                 shadowOpacity: 0,
                 elevation: 0,
             }, navigation.getParam('headerStyle'), params.headerStyle),
-            headerRight: <View style={{paddingRight: 10}}>{navigation.getParam('headerRight') || params.headerRight}</View>,
+            headerRight: <View
+                style={{paddingRight: 10}}>{navigation.getParam('headerRight') || params.headerRight}</View>,
             headerLeft: navigation.getParam('headerLeft') || params.headerLeft,
             title: navigation.getParam('title') || params.title,
             headerTitleStyle: Object.assign({
@@ -271,10 +272,10 @@ export default class ICBase extends React.PureComponent {
 
     };
 
-    openURL(url) {
+    openURL(url, data) {
 
         if (url.indexOf('http://') == 0 || url.indexOf('https://') == 0) {
-            this.pushView('WebView', {uri: url});
+            this.pushView('WebView', {uri: url, ...data});
             return;
         }
         Linking.openURL(url);
