@@ -15,7 +15,7 @@ export default class ICImage extends React.PureComponent<ImageProps, any> {
 
     render() {
 
-        if ((typeof this.props.source != 'number') && this.props.useNative !== false) {
+        if ((typeof this.props.source != 'number') && this.props.useNative !== false && this.props.source && this.props.source.uri.indexOf("//") != -1) {
             return (
                 <View>
                     {!this.state.load && this.props.defaultSource &&
