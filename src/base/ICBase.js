@@ -1,5 +1,14 @@
 import * as React from 'react';
-import {BackHandler, Platform, StatusBar, SafeAreaView, View, StyleSheet, Linking} from 'react-native';
+import {
+    BackHandler,
+    Platform,
+    StatusBar,
+    SafeAreaView,
+    View,
+    StyleSheet,
+    Linking,
+    InteractionManager,
+} from 'react-native';
 import {Analytics} from 'react-native-umshare';
 import ICHeaderView from '../header/ICHeaderView';
 import ICHeaderButton from '../header/ICHeaderButton';
@@ -318,5 +327,13 @@ export default class ICBase extends React.PureComponent {
             BackHandler.addEventListener('hardwareBackPress', this.onBackButtonPressAndroid);
         }
 
+    }
+
+    runAfterInteractions(task: () => {}, timeout = 300) {
+        InteractionManager.runAfterInteractions(() => {
+            this.setTimeout(() => {
+                task();
+            }, timeout);
+        });
     }
 }
