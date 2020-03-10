@@ -36,7 +36,7 @@ export default class ICBase extends React.PureComponent {
             headerTitleStyle: Object.assign({
                 fontSize: ICFont.calc(16),
                 fontWeight: 'normal',
-            }, navigation.getParam('headerTitleStyle')),
+            }, navigation.getParam('headerTitleStyle'), params.headerTitleStyle),
             headerTintColor: navigation.getParam('headerTintColor') || params.headerTintColor || '#333',
             headerTitle: navigation.getParam('headerTitle') || params.headerTitle,
         };
