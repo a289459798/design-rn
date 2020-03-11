@@ -27,49 +27,19 @@ RCT_EXPORT_MODULE()
 +(void)show {
     
     UIWindow *window = [[UIApplication sharedApplication] delegate].window;
-    CGSize viewSize = window.bounds.size;
-    NSString *viewOrientation = @"Portrait";
-    NSArray* imagesDict = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"UILaunchImages"];
-    for (NSDictionary* dict in imagesDict) {
-        CGSize imageSize = CGSizeFromString(dict[@"UILaunchImageSize"]);
-        if (CGSizeEqualToSize(imageSize, viewSize) && [viewOrientation isEqualToString:dict[@"UILaunchImageOrientation"]]) {
-            
-            NSString *lanuchImage = dict[@"UILaunchImageName"];
-            _view = [[UIView alloc] initWithFrame:window.bounds];
-            UIImageView *launchView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:lanuchImage]];
-            launchView.frame = window.bounds;
-            launchView.contentMode = UIViewContentModeScaleAspectFill;
-            [_view addSubview:launchView];
-            float marginBottom = 100.0 / 667 * window.bounds.size.height;
-            _imageView = [[SDAnimatedImageView alloc] initWithFrame:CGRectMake(0, 0, window.bounds.size.width, window.bounds.size.height - marginBottom)];
-            _imageView.contentMode = UIViewContentModeScaleAspectFill;
-            _imageView.clipsToBounds = YES;
-            
-            [_view addSubview:_imageView];
-            [_view bringSubviewToFront:_imageView];
-            
-            [window.rootViewController.view addSubview:_view];
-            [window.rootViewController.view bringSubviewToFront:_view];
-            break;
-        }
-    }
+    _view = [[[NSBundle mainBundle] loadNibNamed:@"LaunchScreen" owner:nil options:nil] lastObject];
+    _view.frame = window.frame;
+    [window addSubview:_view];
 }
 
 + (void)hide {
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if(_timer != nil) {
-            [_timer invalidate];
-            _timer = nil;
-        }
-        [UIView animateWithDuration:1.0f delay:0.1f options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-            _view.alpha = 0.0f;
-            _view.layer.transform = CATransform3DScale(CATransform3DIdentity, 1.2, 1.2, 1);
-            
-        } completion:^(BOOL finished) {
-            [_view removeFromSuperview];
-        }];
-    });
+    [UIView animateWithDuration:1.5f delay:0.0f options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        _view.alpha = 0.0f;
+        _view.layer.transform = CATransform3DScale(CATransform3DIdentity, 1.3f, 1.3f, 1.0f);
+    } completion:^(BOOL finished) {
+        [_view removeFromSuperview];
+    }];
 }
 
 - (void) click {

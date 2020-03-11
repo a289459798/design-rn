@@ -5,6 +5,7 @@ import ICFont from '../theme/ICFont';
 import ICText from '../text/ICText';
 import ICHeaderButton from './ICHeaderButton';
 import ICLine from '../view/ICLine';
+import ICColor from '../theme/ICColor';
 
 export default class ICHeaderView extends React.PureComponent {
 
