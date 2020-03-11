@@ -14,6 +14,7 @@ import ICHeaderView from '../header/ICHeaderView';
 import ICHeaderButton from '../header/ICHeaderButton';
 import ICHeaderTitle from '../header/ICHeaderTitle';
 import ICFont from '../theme/ICFont';
+import ICColor from '../theme/ICColor';
 import Toast from '@ichong/react-native-toast';
 
 export default class ICBase extends React.PureComponent {
@@ -37,7 +38,7 @@ export default class ICBase extends React.PureComponent {
                 fontSize: ICFont.calc(16),
                 fontWeight: 'normal',
             }, navigation.getParam('headerTitleStyle'), params.headerTitleStyle),
-            headerTintColor: navigation.getParam('headerTintColor') || params.headerTintColor || ICColor.color('#333'),
+            headerTintColor: navigation.getParam('headerTintColor') || params.headerTintColor || '#333',
             headerTitle: navigation.getParam('headerTitle') || params.headerTitle,
         };
     };
@@ -330,10 +331,10 @@ export default class ICBase extends React.PureComponent {
     }
 
     runAfterInteractions(task: () => {}, timeout = 300) {
-        InteractionManager.runAfterInteractions(() => {
-            this.setTimeout(() => {
-                task();
-            }, timeout);
-        });
+        // InteractionManager.runAfterInteractions(() => {
+        this.setTimeout(() => {
+            task();
+        }, timeout);
+        // });
     }
 }

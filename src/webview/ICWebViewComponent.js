@@ -126,6 +126,7 @@ export default class ICWebViewComponent extends ICBase {
     }
 
     _renderWebView() {
+
         if (this.getParams('uri')) {
 
             let source = {
@@ -140,6 +141,8 @@ export default class ICWebViewComponent extends ICBase {
             if (this.getParams('headers')) {
                 source.headers = this.getParams('headers');
             }
+
+            console.log(source);
             return (
                 <ICWebView
                     ref={r => this.webview = r}

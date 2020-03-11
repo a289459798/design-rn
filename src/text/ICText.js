@@ -19,7 +19,7 @@ export default class ICText extends React.PureComponent<TextProps, any> {
         light: false,
     };
 
-    
+
     render() {
         if (!this.props.onPress && !this.props.eventId) {
             return <Text
