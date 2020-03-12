@@ -7,15 +7,15 @@ export default class ICListView extends React.PureComponent<FlatListProps, any> 
         let {loading, hasMore} = this.props;
         return this.props.renderFooter || (
             <View style={{alignItems: 'center', justifyContent: 'center', paddingTop: 10, paddingBottom: 10}}>
-                <View style={{flexDirection: 'row'}}>
-                    {loading ? (<ActivityIndicator size="small"/>) : null}
+                {loading ? (<View style={{flexDirection: 'row'}}>
+                    <ActivityIndicator size="small"/>
                     <View style={{justifyContent: 'center', marginLeft: 5}}>
                         <Text style={{
                             fontSize: 12,
-                            color: '#666'
-                        }}>{loading ? '正在加载更多' : hasMore ? '已经到底了' : null}</Text>
+                            color: '#666',
+                        }}>正在加载更多</Text>
                     </View>
-                </View>
+                </View>) : null}
             </View>
         );
     }

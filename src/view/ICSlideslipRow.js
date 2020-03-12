@@ -9,7 +9,7 @@ import {
     Animated,
     TouchableWithoutFeedback,
     UIManager,
-    LayoutAnimation
+    LayoutAnimation,
 } from 'react-native';
 import Interactable from 'react-native-interactable';
 
@@ -24,7 +24,7 @@ export default class ICSlideslipRow extends PureComponent {
 
         this.index = 0;
         this.state = {
-            height: '100%'
+            height: '100%',
         };
     }
 
@@ -33,7 +33,7 @@ export default class ICSlideslipRow extends PureComponent {
         return (
 
             <View ref={(r) => this.layout = r} style={[{
-                flex: 1, backgroundColor: '#fff', overflow: 'hidden', height: this.state.height
+                flex: 1, backgroundColor: '#fff', overflow: 'hidden', height: this.state.height,
             }]}>
 
                 <View style={{position: 'absolute', left: 0, right: 0, top: 0, bottom: 0}}>
@@ -42,13 +42,13 @@ export default class ICSlideslipRow extends PureComponent {
                             [styles.trashHolder, {
                                 backgroundColor: v.color,
                                 right: (this.props.menus.length - 1 - k) * 80,
-                            }
+                            },
                             ]}>
 
                             <TouchableWithoutFeedback pointerEvents='box-only' onLayout={(e) => {
                                 this.props.sideslipView && this.props.sideslipView().onTarget(e.target);
                             }} onPress={() => {
-                                this.view.snapTo({index: 0})
+                                this.view.snapTo({index: 0});
                                 if (v.type == 'delete') {
                                     this.props.sideslipView && this.props.sideslipView().onDelete(this.view);
                                     if (this.props.anim) {
@@ -56,21 +56,21 @@ export default class ICSlideslipRow extends PureComponent {
                                             duration: 300,
                                             update: {
                                                 type: LayoutAnimation.Types.linear,
-                                                property: LayoutAnimation.Properties.scaleY
-                                            }
+                                                property: LayoutAnimation.Properties.scaleY,
+                                            },
                                         });
                                         this.setState({height: 0});
 
                                         setTimeout(() => {
-                                            this.setState({height: '100%'});
-                                            v.onPress && v.onPress(this.view)
-                                        }, 300)
+                                                this.setState({height: '100%'});
+                                            v.onPress && v.onPress(this.view);
+                                        }, 300);
                                         return;
                                     }
 
                                 }
 
-                                v.onPress && v.onPress(this.view)
+                                v.onPress && v.onPress(this.view);
 
                             }}>
                                 <View pointerEvents='box-only' onLayout={(e) => {
@@ -125,7 +125,7 @@ ICSlideslipRow.propTypes = {
     menus: PropTypes.array,
     sideslipView: PropTypes.func.isRequired,
     anim: PropTypes.bool,
-    style: PropTypes.object
+    style: PropTypes.object,
 };
 
 const styles = StyleSheet.create({
@@ -135,5 +135,5 @@ const styles = StyleSheet.create({
         top: 0,
         height: '100%',
         justifyContent: 'center',
-    }
+    },
 });
