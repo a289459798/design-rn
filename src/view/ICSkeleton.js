@@ -29,11 +29,14 @@ export default class ICSkeleton extends PureComponent {
 
     render() {
         return (
-            <Animated.View
-                style={[styles.container, {opacity: this.state.fadeOutOpacity}]}>
+            <View
+                style={[styles.container, {backgroundColor: '#fff'}]}>
+                <Animated.View
+                    style={[styles.container, {opacity: this.state.fadeOutOpacity}]}>
 
-                {this.props.children}
-            </Animated.View>
+                    {this.props.children}
+                </Animated.View>
+            </View>
         );
     }
 
