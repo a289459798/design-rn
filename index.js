@@ -1,4 +1,5 @@
 import ICText from './src/text/ICText';
+import ICRichText from './src/text/ICRichText';
 import ICInput from './src/input/ICInput';
 import ICImage from './src/image/ICImage';
 import ICButton from './src/button/ICButton';
@@ -72,4 +73,5 @@ export {
     ICModal,
     ICActionSheet,
     ICSkeleton,
+    ICRichText,
 };
