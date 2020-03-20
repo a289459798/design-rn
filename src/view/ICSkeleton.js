@@ -12,6 +12,7 @@ import {
     InteractionManager,
     Animated,
     Easing,
+    View,
 } from 'react-native';
 
 
