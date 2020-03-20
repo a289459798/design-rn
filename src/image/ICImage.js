@@ -10,6 +10,7 @@ export default class ICImage extends React.PureComponent<ImageProps, any> {
         super(props);
         this.state = {
             load: false,
+            style: {},
         };
     }
 
@@ -24,9 +25,29 @@ export default class ICImage extends React.PureComponent<ImageProps, any> {
                                 source={this.props.defaultSource}/>
                     </View>}
 
-                    <FastImage onLoad={() => {
-                        this.setState({load: true});
-                    }} {...this.props}/>
+                    <FastImage onLoad={(res) => {
+
+                        let style = {};
+                        for (let k in this.props.style) {
+                            if (typeof this.props.style[k] == 'object') {
+                                style = {
+                                    ...style,
+                                    ...this.props.style[k],
+                                };
+                            } else {
+                                style = this.props.style[k];
+                            }
+                        }
+                        if (style.height == 'auto') {
+                            this.setState({
+                                load: true,
+                                style: {height: style.width / res.nativeEvent.width * res.nativeEvent.height},
+                            });
+                        } else {
+                            this.setState({load: true});
+                        }
+
+                    }} {...this.props} style={[this.props.style, this.state.style]}/>
                 </View>
             );
         }
