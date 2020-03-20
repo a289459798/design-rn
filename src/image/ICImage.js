@@ -25,29 +25,33 @@ export default class ICImage extends React.PureComponent<ImageProps, any> {
                                 source={this.props.defaultSource}/>
                     </View>}
 
-                    <FastImage onLoad={(res) => {
+            <FastImage onLoad={(res) => {
 
-                        let style = {};
-                        for (let k in this.props.style) {
-                            if (typeof this.props.style[k] == 'object') {
-                                style = {
-                                    ...style,
-                                    ...this.props.style[k],
-                                };
-                            } else {
-                                style = this.props.style[k];
-                            }
-                        }
-                        if (style.height == 'auto') {
-                            this.setState({
-                                load: true,
-                                style: {height: style.width / res.nativeEvent.width * res.nativeEvent.height},
-                            });
+                let newStyle = {};
+                if (this.props.width == 'auto' || this.props.height == 'auto') {
+                    let style = {};
+                    for (let k in this.props.style) {
+                        if (typeof this.props.style[k] == 'object') {
+                            style = {
+                                ...style,
+                                ...this.props.style[k],
+                            };
                         } else {
-                            this.setState({load: true});
+                            style = this.props.style[k];
                         }
+                    }
 
-                    }} {...this.props} style={[this.props.style, this.state.style]}/>
+                    if (this.props.width == 'auto') {
+                        newStyle.width = (style.height || ICScreen.height) / res.nativeEvent.height * res.nativeEvent.width;
+                    }
+                    if (this.props.height == 'auto') {
+                        newStyle.height = (style.width || ICScreen.width) / res.nativeEvent.width * res.nativeEvent.height;
+                    }
+                }
+                this.setState({load: true, style: newStyle});
+
+
+            }} {...this.props} style={[this.props.style, this.state.style]}/>
                 </View>
             );
         }
