@@ -23,6 +23,7 @@ export default class ICText extends React.PureComponent<TextProps, any> {
     render() {
         if (!this.props.onPress && !this.props.eventId) {
             return <Text
+                selectable={true}
                 allowFontScaling={false}
                 {...this.props}
                 style={[{color: this.props.light ? ICColor.lightGray : this.props.gray ? ICColor.gray : ICColor.darkGray}, this.props.style]}
@@ -31,6 +32,7 @@ export default class ICText extends React.PureComponent<TextProps, any> {
             </Text>;
         }
         return <Text
+            selectable={true}
             allowFontScaling={false}
             {...this.props}
             style={[{color: this.props.light ? ICColor.lightGray : this.props.gray ? ICColor.gray : ICColor.darkGray}, this.props.style]}
