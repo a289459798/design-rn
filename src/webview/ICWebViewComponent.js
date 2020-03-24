@@ -20,7 +20,8 @@ import ICImage from '../image/ICImage';
 import ICGradientView from '../gradient/ICGradientView';
 import ICTouchableWithoutFeedback from '../touchable/ICTouchableWithoutFeedback';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {ICFont, ICText} from '@ichong/design-rn';
+import ICFont from '../theme/ICFont';
+import ICText from '../text/ICText';
 
 export default class ICWebViewComponent extends ICBase {
 

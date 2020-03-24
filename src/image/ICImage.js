@@ -3,7 +3,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import FastImage from 'react-native-fast-image';
 import {View, Image} from 'react-native';
-import {ICScreen} from '@ichong/design-rn';
+import ICScreen from '../theme/ICScreen';
 
 export default class ICImage extends React.PureComponent<ImageProps, any> {
 

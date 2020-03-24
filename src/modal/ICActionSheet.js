@@ -1,7 +1,13 @@
 import React from 'react';
 import {View, TouchableWithoutFeedback, Modal, StyleSheet} from 'react-native';
 import BottomSheet from 'reanimated-bottom-sheet';
-import {ICColor, ICFont, ICLine, ICModal, ICScreen, ICText, ICTouchableOpacity} from '@ichong/design-rn';
+import ICColor from '../theme/ICColor';
+import ICFont from '../theme/ICFont';
+import ICLine from '../view/ICLine';
+import ICModal from '../modal/ICModal';
+import ICScreen from '../theme/ICScreen';
+import ICText from '../text/ICText';
+import ICTouchableOpacity from '../touchable/ICTouchableOpacity';
 
 export default class ICActionSheet extends React.PureComponent {
 
