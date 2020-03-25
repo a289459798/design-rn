@@ -18,10 +18,25 @@ export default {
         }
     },
 
+    setImage: (lightImage, darkImage) => {
+        self.lightImage = lightImage;
+        self.darkImage = darkImage;
+
+    },
+
     color: (color) => {
         if (Platform.OS == 'android') {
             return color;
         }
         return RNDesignRn.isDark == 1 ? (self.darkColor[color] ? self.darkColor[color] : color) : self.lightColor[color] ? self.lightColor[color] : color;
+    },
+
+    image: (key) => {
+        if (Platform.OS == 'android') {
+            return self.lightImage[key];
+        } else {
+            return RNDesignRn.isDark == 1 ? (self.darkImage[key] ? self.darkImage[key] : self.lightImage[key]) : self.lightImage[key];
+        }
+        
     },
 };
