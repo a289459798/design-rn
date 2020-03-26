@@ -6,6 +6,12 @@ export default {
     iphonx: Platform.OS == 'ios' && (Dimensions.get('window').height == 812 || Dimensions.get('window').height == 896),
     iphone: Platform.OS === 'ios',
     android: Platform.OS === 'android',
+    calcWithHeight: (size) => {
+        if (!size) {
+            return Dimensions.get('window').height;
+        }
+        return Dimensions.get('window').height / 812 * size;
+    },
     calc: (size, defaultSize = 375) => {
         if (!size) {
             return Dimensions.get('window').width;
