@@ -1,11 +1,12 @@
 import * as React from 'react';
-import {View} from 'react-native';
+import {View, Animated, StatusBar} from 'react-native';
 import ICTouchableNativeFeedback from '../touchable/ICTouchableNativeFeedback';
 import ICFont from '../theme/ICFont';
 import ICText from '../text/ICText';
 import ICHeaderButton from './ICHeaderButton';
 import ICLine from '../view/ICLine';
 import ICColor from '../theme/ICColor';
+import ICScreen from '../theme/ICScreen';
 
 export default class ICHeaderView extends React.PureComponent {
 
@@ -14,18 +15,21 @@ export default class ICHeaderView extends React.PureComponent {
     };
 
     render() {
+        let statusBarHeight = ICScreen.iphonx ? 44 : ICScreen.iphone ? 20 : StatusBar.currentHeight;
         return (
             <>
-                <View
+                <Animated.View
                     ref={e => this._view = e}
                     style={[{
                         width: '100%',
-                        height: 44,
+                        height: this.props.safeAreaHide ? 44 + statusBarHeight : 44,
+                        paddingTop: this.props.safeAreaHide ? statusBarHeight : 0,
                         backgroundColor: '#fff',
                         flexDirection: 'row',
                         alignItems: 'center',
                         justifyContent: 'space-between',
                         paddingHorizontal: ICFont.f10,
+                        zIndex: 9,
                     }, this.props.style]}>
                     {this.props.leftButtons ?
                         <ICHeaderButton items={this.props.leftButtons} style={this.props.leftStyle}/>
@@ -47,7 +51,7 @@ export default class ICHeaderView extends React.PureComponent {
                     {this.props.rightButtons ?
                         <ICHeaderButton items={this.props.rightButtons} style={[this.props.rightStyle]}/>
                         : this.props.rightComponent ? this.props.rightComponent : null}
-                </View>
+                </Animated.View>
                 {this.props.showLine ? <ICLine/> : null}
             </>
         );
