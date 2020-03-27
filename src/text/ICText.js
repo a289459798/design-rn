@@ -26,7 +26,7 @@ export default class ICText extends React.PureComponent<TextProps, any> {
                 selectable={true}
                 allowFontScaling={false}
                 {...this.props}
-                style={[{color: this.props.light ? ICColor.lightGray : this.props.gray ? ICColor.gray : ICColor.darkGray}, this.props.style]}
+                style={[this.props.style]}
             >
                 {this.props.children}
             </Text>;
