@@ -27,7 +27,10 @@ export default class ICBottomSheet extends React.PureComponent {
                     bottom: 0,
                     left: 0,
                     right: 0,
-                }} onPress={() => this.snapTo(0)}>
+                }} onPress={() => {
+                    this.snapTo(0);
+                    this.snapTo(0);
+                }}>
                     <View style={{
                         backgroundColor: 'rgba(0, 0, 0, 0.4)',
                         width: '100%',
@@ -81,6 +84,7 @@ export default class ICBottomSheet extends React.PureComponent {
     }
 
     snapTo(index) {
+        this.sheet.snapTo(index);
         this.sheet.snapTo(index);
     }
 }
