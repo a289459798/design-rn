@@ -189,8 +189,6 @@ export default class ICWebViewComponent extends ICBase {
                     }}
                     onLoadEnd={() => {
                         this.loaded = true;
-                        this.webview.injectJavaScript('document.querySelector(".handleForm' +
-                            ' .header").style.backgroundSize = \'100%\'');
                     }}
                     onError={(e) => {
                         this.setHeaderTitle('加载失败');
@@ -333,9 +331,6 @@ export default class ICWebViewComponent extends ICBase {
             url: navState.url,
         });
         this.setHeaderTitle(navState.title);
-
-        setTimeout(() => this.webview && this.webview.injectJavaScript('document.querySelector(".handleForm' +
-            ' .header").style.backgroundSize = \'100%\''), 1000);
 
     };
 

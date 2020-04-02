@@ -44,7 +44,7 @@ export default class ICHeaderView extends React.PureComponent {
                             right: 0,
                         }, this.props.centerStyle]}>
                             {this.props.centerComponent ||
-                            <ICText style={{fontSize: ICFont.f16}}>
+                            <ICText style={[{fontSize: ICFont.f16}, this.props.titleStyle]}>
                                 {this.props.title}
                             </ICText>}
                         </View> : null}

@@ -39,6 +39,10 @@ export default class ICListView extends React.PureComponent<FlatListProps, any> 
         return (null);
     }
 
+    scrollToIndex(data) {
+        this.ref.scrollToIndex(data);
+    }
+
     render() {
         return <FlatList
             ref={(e) => this.ref = e}
