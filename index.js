@@ -35,6 +35,7 @@ import ICSlideslipRow from './src/view/ICSlideslipRow';
 import ICModal from './src/modal/ICModal';
 import ICActionSheet from './src/modal/ICActionSheet';
 import ICSkeleton from './src/view/ICSkeleton';
+import ICSafeBottom from './src/view/ICSafeBottom';
 
 export {
     ICText,
@@ -74,4 +75,5 @@ export {
     ICActionSheet,
     ICSkeleton,
     ICRichText,
+    ICSafeBottom,
 };
