@@ -85,6 +85,9 @@ export default class ICWebViewComponent extends ICBase {
         js += `window.${this.getNamespace()} = {};`;
         for (let k in fn) {
             js += `
+                window.postMessage = function(data) {
+                    window.ReactNativeWebView.postMessage(data);
+                }
                 window.${this.getNamespace()}.${k} = function(data) {
                     window.ReactNativeWebView.postMessage(JSON.stringify({type: '${k}',data: data}));
                 }
@@ -143,7 +146,6 @@ export default class ICWebViewComponent extends ICBase {
                 source.headers = this.getParams('headers');
             }
 
-            console.log(source);
             return (
                 <ICWebView
                     ref={r => this.webview = r}
@@ -165,7 +167,6 @@ export default class ICWebViewComponent extends ICBase {
                     startInLoadingState={true}
                     onLoadStart={() => this.loaded = false}
                     renderLoading={(res) => {
-                        console.log(111111);
                         return (<View style={{width: '100%', height: ICScreen.calc(2), position: 'absolute', top: 0}}>
                             <View style={{width: '100%', height: '100%', backgroundColor: '#ddd'}}/>
                             <ICGradientView
