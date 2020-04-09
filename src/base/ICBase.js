@@ -314,17 +314,41 @@ export default class ICBase extends React.PureComponent {
         if (Platform.OS == 'android') {
             BackHandler.removeEventListener('hardwareBackPress', this.onBackButtonPressAndroid);
         }
+
+        this.pageUnLoad();
+    }
+
+    /**
+     * 页面加载完成(动画执行完成)
+     */
+    pageShow() {
+    }
+
+    /**
+     * 页面卸载，类似componentDidMount
+     */
+    pageUnLoad() {
+    }
+
+    /**
+     * 页面加载，类似componentDidMount
+     */
+    pageLoad() {
     }
 
     componentDidMount(): void {
+
+        this.pageLoad();
+
+        this.runAfterInteractions(() => {
+            this.pageShow();
+        });
 
         if (this.props.navigation.state.routeName) {
             Analytics.pageBegin(this.props.navigation.state.routeName);
         }
 
         if (Platform.OS == 'android') {
-            StatusBar.setBackgroundColor('#fff');
-            StatusBar.setTranslucent(false);
             BackHandler.addEventListener('hardwareBackPress', this.onBackButtonPressAndroid);
         }
 
