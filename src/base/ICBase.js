@@ -17,10 +17,11 @@ import ICFont from '../theme/ICFont';
 import ICColor from '../theme/ICColor';
 import Toast from '@ichong/react-native-toast';
 
-export default class ICBase extends React.PureComponent {
+let navigationTitle;
+export default class ICBase extends React.Component {
 
     static navigationOptions = ({navigation, defaultOptions}, params = {}) => {
-
+        navigationTitle = navigation.getParam('title') || params.title;
         return {
             headerStyle: Object.assign({
                 height: 44,
@@ -308,8 +309,10 @@ export default class ICBase extends React.PureComponent {
         }
         this.#time = [];
         this.#interval = [];
-        if (this.props.navigation.state.routeName) {
-            Analytics.pageEnd(this.props.navigation.state.routeName);
+
+        let pageTitle = this.getPageTitle();
+        if (pageTitle) {
+            Analytics.pageEnd(pageTitle);
         }
         if (Platform.OS == 'android') {
             BackHandler.removeEventListener('hardwareBackPress', this.onBackButtonPressAndroid);
@@ -336,6 +339,10 @@ export default class ICBase extends React.PureComponent {
     pageLoad() {
     }
 
+    dispatch(callback: CallableFunction) {
+        this.props.dispatch(callback);
+    }
+
     componentDidMount(): void {
 
         this.pageLoad();
@@ -344,8 +351,10 @@ export default class ICBase extends React.PureComponent {
             this.pageShow();
         });
 
-        if (this.props.navigation.state.routeName) {
-            Analytics.pageBegin(this.props.navigation.state.routeName);
+        let pageTitle = this.getPageTitle();
+        console.log(pageTitle);
+        if (pageTitle) {
+            Analytics.pageBegin(pageTitle);
         }
 
         if (Platform.OS == 'android') {
@@ -353,6 +362,15 @@ export default class ICBase extends React.PureComponent {
         }
 
     }
+
+    getPageTitle() {
+
+        if (this.pageTitle) {
+            return this.pageTitle;
+        }
+        return navigationTitle;
+    }
+
 
     runAfterInteractions(task: () => {}, timeout = 300) {
         // InteractionManager.runAfterInteractions(() => {
