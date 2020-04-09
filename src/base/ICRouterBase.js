@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export default class ICBase extends React.Component {
+export default class ICRouterBase extends React.Component {
 
     get params() {
         let params = this.props.navigation.state.params || {};

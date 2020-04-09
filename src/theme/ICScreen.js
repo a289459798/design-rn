@@ -4,8 +4,8 @@ export default {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
     iphonx: Platform.OS == 'ios' && (Dimensions.get('window').height == 812 || Dimensions.get('window').height == 896),
-    iphone: Platform.OS === 'ios',
-    android: Platform.OS === 'android',
+    iphone: Platform.OS == 'ios',
+    android: Platform.OS == 'android',
     calcWithHeight: (size) => {
         if (!size) {
             return Dimensions.get('window').height;
