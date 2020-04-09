@@ -36,6 +36,7 @@ import ICModal from './src/modal/ICModal';
 import ICActionSheet from './src/modal/ICActionSheet';
 import ICSkeleton from './src/view/ICSkeleton';
 import ICSafeBottom from './src/view/ICSafeBottom';
+import ICRouterBase from './src/base/ICRouterBase';
 
 export {
     ICText,
@@ -76,4 +77,5 @@ export {
     ICSkeleton,
     ICRichText,
     ICSafeBottom,
+    ICRouterBase,
 };
