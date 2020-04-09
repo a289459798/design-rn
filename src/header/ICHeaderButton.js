@@ -13,6 +13,7 @@ export default class ICHeaderTitleICHeaderButton extends React.PureComponent {
                 <View style={[{
                     flexDirection: 'row',
                     alignItems: 'center',
+                    zIndex: 9,
                 }, this.props.style]}>
                     {this.props.items.map((v, k) => {
                         if (v.icon) {
@@ -20,7 +21,8 @@ export default class ICHeaderTitleICHeaderButton extends React.PureComponent {
                                 onPress={v.onPress}
                                 eventId={v.eventId}
                                 key={k}><View style={{padding: ICFont.f5}}>
-                                <v.icon name={v.name} color={v.color} size={v.size ? ICFont.calc(v.size) : ICFont.calc(17)}/>
+                                <v.icon name={v.name} color={v.color}
+                                        size={v.size ? ICFont.calc(v.size) : ICFont.calc(17)}/>
                             </View></ICTouchableNativeFeedback>;
                         } else if (v.text) {
                             return <ICTouchableNativeFeedback
