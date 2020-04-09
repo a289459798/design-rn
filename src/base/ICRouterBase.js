@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {Linking} from 'react-native';
 
 export default class ICRouterBase extends React.Component {
 
@@ -71,5 +72,14 @@ export default class ICRouterBase extends React.Component {
 
     push(component, props, type = '') {
         this.props.navigation.push(component, {...props, transition: type});
+    }
+
+    openURL(url, data) {
+
+        if (url.indexOf('http://') == 0 || url.indexOf('https://') == 0) {
+            this.pushView('WebView', {uri: url, ...data});
+            return;
+        }
+        Linking.openURL(url);
     }
 }

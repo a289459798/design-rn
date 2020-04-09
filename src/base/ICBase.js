@@ -213,15 +213,6 @@ export default class ICBase extends ICRouterBase {
 
     };
 
-    openURL(url, data) {
-
-        if (url.indexOf('http://') == 0 || url.indexOf('https://') == 0) {
-            this.pushView('WebView', {uri: url, ...data});
-            return;
-        }
-        Linking.openURL(url);
-    }
-
     componentWillUnmount(): void {
         if (this.#time && this.#time.length > 0) {
             this.#time.forEach((v) => {
