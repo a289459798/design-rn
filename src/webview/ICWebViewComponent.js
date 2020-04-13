@@ -86,7 +86,16 @@ export default class ICWebViewComponent extends ICBase {
         for (let k in fn) {
             js += `
                 window.postMessage = function(data) {
-                    window.ReactNativeWebView.postMessage(data);
+                    try {
+                        let dataObj = JSON.parse(data);
+                        if(typeof window.${this.getNamespace()}[dataObj.type]) {
+                            window.${this.getNamespace()}[dataObj.type](data)
+                        } else {
+                            window.ReactNativeWebView.postMessage(data);
+                        }
+                    } catch(error) {
+                        window.ReactNativeWebView.postMessage(data);
+                    }
                 }
                 window.${this.getNamespace()}.${k} = function(data) {
                     window.ReactNativeWebView.postMessage(JSON.stringify({type: '${k}',data: data}));
