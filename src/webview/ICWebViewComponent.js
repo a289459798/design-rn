@@ -325,14 +325,14 @@ export default class ICWebViewComponent extends ICBase {
 
     onNavigationStateChange = (navState) => {
 
-
         this.setState({
             canGoBack: navState.canGoBack,
             canGoForward: navState.canGoForward,
             url: navState.url,
         });
-        this.setHeaderTitle(navState.title);
-
+        if (navState.title) {
+            this.setHeaderTitle(navState.title);
+        }
     };
 
 }
