@@ -189,22 +189,27 @@ export default class ICBase extends ICRouterBase {
     }
 
     onBackButtonPressAndroid = () => {
+
         let nav = this.props.navigation.getParam('nav');
-
         if (nav) {
-            if (nav.routes.length == 1) {
-                if (this.lastBackPressed && (this.lastBackPressed + 2000 >= Date.now())) {
 
-                    BackHandler.exitApp();
-                    return false;
+            for (let i = 0; i < nav.routes.length; i++) {
+                if(nav.routes[i].key == 'App') {
+                    if (nav.routes[i].routes.length == 1) {
+                        if (this.lastBackPressed && (this.lastBackPressed + 2000 >= Date.now())) {
+
+                            BackHandler.exitApp();
+                            return false;
+                        }
+                        this.lastBackPressed = Date.now();
+
+                        Toast.show('再按一次退出' + this.getAppName());
+                    } else if (this.getHandleBack) {
+                        this.getHandleBack();
+                    } else {
+                        this.popView();
+                    }
                 }
-                this.lastBackPressed = Date.now();
-
-                Toast.show('再按一次退出' + this.getAppName());
-            } else if (this.getHandleBack) {
-                this.getHandleBack();
-            } else {
-                this.popView();
             }
 
             return true;
