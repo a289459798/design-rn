@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {Linking} from 'react-native';
+import {StackActions} from 'react-navigation';
 
 export default class ICRouterBase extends React.Component {
 
