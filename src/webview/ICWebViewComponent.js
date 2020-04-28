@@ -171,6 +171,7 @@ export default class ICWebViewComponent extends ICBase {
                             return false;
                         }
                     }}
+                    originWhitelist={['*']}
                     domStorageEnabled={true}
                     javaScriptEnabled={true}
                     startInLoadingState={true}
