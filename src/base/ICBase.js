@@ -60,10 +60,6 @@ export default class ICBase extends ICRouterBase {
     constructor(props) {
         super(props);
 
-        if (new.target === ICBase) {
-            throw new Error('不能直接实例化');
-        }
-
         this.#time = [];
         this.#interval = [];
     }
