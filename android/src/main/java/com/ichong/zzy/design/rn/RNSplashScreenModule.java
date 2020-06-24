@@ -125,6 +125,8 @@ public class RNSplashScreenModule extends ReactContextBaseJavaModule {
 
     static TimerTask timerTask;
 
+    static boolean isClick = false;
+
     public static void showAd(Activity activity, final String image, final int t, final Callback callback) {
 
         time = t;
@@ -170,7 +172,10 @@ public class RNSplashScreenModule extends ReactContextBaseJavaModule {
                         imageView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                callback.invoke();
+                                if(!isClick) {
+                                    callback.invoke();
+                                    isClick = true;
+                                }
                             }
                         });
 
