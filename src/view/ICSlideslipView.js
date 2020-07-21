@@ -47,7 +47,11 @@ export default class ICSlideslipView extends PureComponent {
 
                 if (this._drag) {
                     this._drag.forEach((v, k) => {
-                        v.snapTo({index: 0});
+                        try {
+                            v.snapTo({index: 0});
+                        } catch (e) {
+                            this._drag = [];
+                        }
                     })
                 }
             }
