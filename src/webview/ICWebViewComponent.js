@@ -286,7 +286,7 @@ export default class ICWebViewComponent extends ICBase {
                 {this._renderWebView()}
 
                 {this.getParams('uri') && this.state.showBottom && <View ref={(r) => this.back = r} style={{
-                    height: ICScreen.iphonx ? 79 : ICScreen.calc(40),
+                    height: ICScreen.calc(40),
                     backgroundColor: '#fff',
                     borderTopColor: '#e2e2e2',
                     borderTopWidth: StyleSheet.hairlineWidth,
