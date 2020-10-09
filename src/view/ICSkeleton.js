@@ -45,24 +45,26 @@ export default class ICSkeleton extends PureComponent {
 
         InteractionManager.runAfterInteractions(() => {
 
-            this.anim = Animated.loop(
-                Animated.sequence([
-                    Animated.timing(this.state.fadeOutOpacity, {
-                        toValue: 0.5,
-                        duration: 500,
-                        useNativeDriver: true,
-                        easing: Easing.bezier(.56, .63, .99, .75),
-                    }),
+            if (!this.props.noAnimated) {
+                this.anim = Animated.loop(
+                    Animated.sequence([
+                        Animated.timing(this.state.fadeOutOpacity, {
+                            toValue: 0.5,
+                            duration: 500,
+                            useNativeDriver: true,
+                            easing: Easing.bezier(.56, .63, .99, .75),
+                        }),
 
 
-                    Animated.timing(this.state.fadeOutOpacity, {
-                        toValue: 1,
-                        duration: 500,
-                        useNativeDriver: true,
-                        easing: Easing.bezier(.56, .63, .99, .75),
-                    }),
-                ]),
-            ).start();
+                        Animated.timing(this.state.fadeOutOpacity, {
+                            toValue: 1,
+                            duration: 500,
+                            useNativeDriver: true,
+                            easing: Easing.bezier(.56, .63, .99, .75),
+                        }),
+                    ]),
+                ).start();
+            }
 
         });
 
