@@ -12,44 +12,36 @@ export default class ICBottomSheet extends React.PureComponent {
     }
 
     render() {
-
+        const {height, transparentColor = 'rgba(0, 0, 0, 0.7)'} = this.props;
         return (
             <Modal
-                animationType='fade'
+                animationType={'fade'}
                 transparent={true}
                 visible={this.state.visible}
                 onRequestClose={() => {
                 }}
             >
-                <TouchableWithoutFeedback style={{
-                    position: 'absolute',
-                    top: 0,
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                }} onPress={() => {
-                    this.snapTo(0);
-                    this.snapTo(0);
-                }}>
-                    <View style={{
-                        backgroundColor: 'rgba(0, 0, 0, 0.4)',
-                        width: '100%',
-                        height: '100%',
-                    }}/>
+                <TouchableWithoutFeedback
+                    style={{position: 'absolute', top: 0, bottom: 0, left: 0, right: 0}}
+                    onPress={() => {
+                        this.snapTo(0);
+                        this.snapTo(0);
+                    }}
+                >
+                    <View style={{backgroundColor: transparentColor, width: '100%', height: '100%'}}/>
                 </TouchableWithoutFeedback>
                 <BottomSheet
                     ref={(r) => this.sheet = r}
-                    snapPoints={[0, this.props.height || '80%']}
+                    snapPoints={[0, height || '80%']}
                     renderContent={() => {
                         if (this.props.renderContent) {
                             return this.props.renderContent;
                         }
-
-                        return (<View style={[{
-                            backgroundColor: '#fff', height: '100%',
-                        }, this.props.contentStyle]}>
-                            {this.props.children}
-                        </View>);
+                        return (
+                            <View style={[{backgroundColor: '#fff', height: '100%'}, this.props.contentStyle]}>
+                                {this.props.children}
+                            </View>
+                        );
                     }}
                     onOpenEnd={() => {
                         this.open = true;
@@ -63,8 +55,8 @@ export default class ICBottomSheet extends React.PureComponent {
                     {...this.props}
                     style={[{zIndex: 9}, this.props.style]}
                 />
-            </Modal>);
-
+            </Modal>
+        );
     }
 
     show() {
