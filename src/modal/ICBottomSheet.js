@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, TouchableWithoutFeedback, Modal} from 'react-native';
+import {View, TouchableOpacity, Modal} from 'react-native';
 import BottomSheet from 'reanimated-bottom-sheet';
 
 export default class ICBottomSheet extends React.PureComponent {
@@ -21,15 +21,14 @@ export default class ICBottomSheet extends React.PureComponent {
                 onRequestClose={() => {
                 }}
             >
-                <TouchableWithoutFeedback
-                    style={{position: 'absolute', top: 0, bottom: 0, left: 0, right: 0}}
+                <TouchableOpacity
+                    activeOpacity={1}
+                    style={{flex: 1, backgroundColor: transparentColor}}
                     onPress={() => {
                         this.snapTo(0);
                         this.snapTo(0);
                     }}
-                >
-                    <View style={{backgroundColor: transparentColor, width: '100%', height: '100%'}}/>
-                </TouchableWithoutFeedback>
+                />
                 <BottomSheet
                     ref={(r) => this.sheet = r}
                     snapPoints={[0, height || '80%']}
