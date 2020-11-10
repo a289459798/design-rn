@@ -1,27 +1,17 @@
 import * as React from 'react';
-import {View, ViewProps, Platform, Image} from 'react-native';
+import {View, ViewProps, Platform, Image, StyleSheet} from 'react-native';
 import ICScreen from '../theme/ICScreen';
 
 export default class ICShadow extends React.PureComponent<ViewProps, any> {
 
     render() {
-
-        if (Platform.OS == 'android') {
+        const {style, children, type} = this.props;
+        if (Platform.OS === 'android') {
             return (
-                <View
-                    style={[this.props.style, {overflow: 'visible'}]}>
-                    {this.props.children}
-
-                    <View style={{left: -4, top: -4, right: -4, bottom: -4, position: 'absolute', zIndex: -1}}>
-                        <Image source={{'uri': 'ic_yy'}}
-                               style={{
-                                   resizeMode: 'stretch',
-                                   position: 'absolute',
-                                   top: 0,
-                                   left: 0,
-                                   bottom: 0,
-                                   right: 0,
-                               }}/>
+                <View style={[style, {overflow: 'visible'}]}>
+                    {children}
+                    <View style={styles.androidView}>
+                        <Image source={{'uri': 'ic_yy'}} style={styles.androidImage}/>
                     </View>
                 </View>
             );
@@ -29,16 +19,53 @@ export default class ICShadow extends React.PureComponent<ViewProps, any> {
         return (
             <View
                 {...this.props}
-                style={[{
-                    shadowColor: 'rgba(51, 51, 51, 0.08)',
-                    shadowOffset: {width: 2, height: 3},
-                    shadowOpacity: 1,
-                    shadowRadius: 9,
-                    borderRadius: ICScreen.calc(10),
-                    backgroundColor: '#fff',
-                }, this.props.style]}>
-                {this.props.children}
+                style={[type === 'moderate'? styles.shadowModerateView : type === 'severe'? styles.shadowSevereView : styles.shadowMildView, style]}
+            >
+                {children}
             </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    androidView: {
+        left: -4,
+        top: -4,
+        right: -4,
+        bottom: -4,
+        position: 'absolute',
+        zIndex: -1
+    },
+    androidImage: {
+        resizeMode: 'stretch',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+    },
+    shadowMildView: {
+        borderRadius: ICScreen.calc(8),
+        backgroundColor: '#fff',
+        shadowColor: '#EBEBEB',
+        shadowOffset: {width: 0, height: 0},
+        shadowOpacity: 1,
+        shadowRadius: 2,
+    },
+    shadowModerateView: {
+        borderRadius: ICScreen.calc(8),
+        backgroundColor: '#fff',
+        shadowColor: '#EBEBEB',
+        shadowOffset: {width: 0, height: 0},
+        shadowOpacity: 1,
+        shadowRadius: 4,
+    },
+    shadowSevereView: {
+        borderRadius: ICScreen.calc(8),
+        backgroundColor: '#fff',
+        shadowColor: '#000',
+        shadowOffset: {width: 0, height: 0},
+        shadowOpacity: 0.2,
+        shadowRadius: 4,
+    }
+});
