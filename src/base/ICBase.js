@@ -14,6 +14,7 @@ import ICHeaderView from '../header/ICHeaderView';
 import ICHeaderButton from '../header/ICHeaderButton';
 import ICHeaderTitle from '../header/ICHeaderTitle';
 import ICFont from '../theme/ICFont';
+import ICScreen from '../theme/ICScreen';
 import ICColor from '../theme/ICColor';
 import Toast from '@ichong/react-native-toast';
 import ICRouterBase from './ICRouterBase';
@@ -31,6 +32,7 @@ export default class ICBase extends ICRouterBase {
                 borderBottomColor: '#F0F0F0',
                 shadowOpacity: 0,
                 elevation: 0,
+                marginTop: ICScreen.iphone12 ? 24 : 0,
             }, navigation.getParam('headerStyle'), params.headerStyle),
             headerRight: <View
                 style={{paddingRight: 10}}>{navigation.getParam('headerRight') || params.headerRight}</View>,
@@ -59,7 +61,6 @@ export default class ICBase extends ICRouterBase {
 
     constructor(props) {
         super(props);
-
         this.#time = [];
         this.#interval = [];
     }
@@ -185,20 +186,16 @@ export default class ICBase extends ICRouterBase {
     }
 
     onBackButtonPressAndroid = () => {
-
         let nav = this.props.navigation.getParam('nav');
         if (nav) {
-
             for (let i = 0; i < nav.routes.length; i++) {
-                if(nav.routes[i].key == 'App') {
+                if (nav.routes[i].key == 'App') {
                     if (nav.routes[i].routes.length == 1) {
                         if (this.lastBackPressed && (this.lastBackPressed + 2000 >= Date.now())) {
-
                             BackHandler.exitApp();
                             return false;
                         }
                         this.lastBackPressed = Date.now();
-
                         Toast.show('再按一次退出' + this.getAppName());
                     } else if (this.getHandleBack) {
                         this.getHandleBack();
@@ -207,11 +204,9 @@ export default class ICBase extends ICRouterBase {
                     }
                 }
             }
-
             return true;
         }
         return false;
-
     };
 
     componentWillUnmount(): void {
@@ -231,7 +226,6 @@ export default class ICBase extends ICRouterBase {
         }
         this.#time = [];
         this.#interval = [];
-
         let pageTitle = this.getPageTitle();
         if (pageTitle) {
             Analytics.pageEnd(pageTitle);
@@ -239,7 +233,6 @@ export default class ICBase extends ICRouterBase {
         if (Platform.OS == 'android') {
             BackHandler.removeEventListener('hardwareBackPress', this.onBackButtonPressAndroid);
         }
-
         this.pageUnLoad();
     }
 
@@ -266,26 +259,20 @@ export default class ICBase extends ICRouterBase {
     }
 
     componentDidMount(): void {
-
         this.pageLoad();
-
         this.runAfterInteractions(() => {
             this.pageShow();
         });
-
         let pageTitle = this.getPageTitle();
         if (pageTitle) {
             Analytics.pageBegin(pageTitle);
         }
-
         if (Platform.OS == 'android') {
             BackHandler.addEventListener('hardwareBackPress', this.onBackButtonPressAndroid);
         }
-
     }
 
     getPageTitle() {
-
         if (this.pageTitle) {
             return this.pageTitle;
         }
