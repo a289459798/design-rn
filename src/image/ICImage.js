@@ -60,7 +60,7 @@ export default class ICImage extends React.PureComponent<ImageProps, any> {
         return (
             <Image
                 {...this.props}
-                // source={this.props.defaultSource}
+                source={this.props.defaultSource}
             />
         );
     }
