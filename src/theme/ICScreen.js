@@ -6,7 +6,7 @@ export default {
     /**
      * iPhoneX：刘海高度：44pt，底部高度：34pt
      */
-    iphonx: Platform.OS == 'ios' && (Dimensions.get('window').height >= 812),
+    iphonx: Platform.OS == 'ios' && (Dimensions.get('window').height === 812 || Dimensions.get('window').height === 896),
     iphone12: Platform.OS == 'ios' && (Dimensions.get('window').height === 844 || Dimensions.get('window').height === 926),
     iphone: Platform.OS == 'ios',
     android: Platform.OS == 'android',
