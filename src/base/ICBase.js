@@ -10,12 +10,8 @@ import {
     InteractionManager,
 } from 'react-native';
 import {Analytics} from 'react-native-umshare';
-import ICHeaderView from '../header/ICHeaderView';
 import ICHeaderButton from '../header/ICHeaderButton';
-import ICHeaderTitle from '../header/ICHeaderTitle';
 import ICFont from '../theme/ICFont';
-import ICScreen from '../theme/ICScreen';
-import ICColor from '../theme/ICColor';
 import Toast from '@ichong/react-native-toast';
 import ICRouterBase from './ICRouterBase';
 
@@ -32,7 +28,6 @@ export default class ICBase extends ICRouterBase {
                 borderBottomColor: '#F0F0F0',
                 shadowOpacity: 0,
                 elevation: 0,
-                marginTop: ICScreen.iphone12 ? 24 : 0,
             }, navigation.getParam('headerStyle'), params.headerStyle),
             headerRight: <View
                 style={{paddingRight: 10}}>{navigation.getParam('headerRight') || params.headerRight}</View>,
