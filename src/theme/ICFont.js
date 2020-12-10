@@ -20,7 +20,7 @@ export default {
     f16: ICScreen.calc(16),
     f17: ICScreen.calc(17),
     f18: ICScreen.calc(18),
-    bold: Platform.OS === 'ios' ? '400' : 'bold',
+    bold: Platform.OS === 'ios' ? '500' : 'bold',
     calc: (size, defaultSize) => {
         return ICScreen.calc(size, defaultSize);
     },
