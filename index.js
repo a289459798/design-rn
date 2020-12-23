@@ -27,6 +27,7 @@ import ICImageBrowser from './src/image/ICImageBrowser';
 import ICHeaderView from './src/header/ICHeaderView';
 import ICHeaderTitle from './src/header/ICHeaderTitle';
 import ICHeaderButton from './src/header/ICHeaderButton';
+import ICHeaderRightButtons from './src/header/ICHeaderRightButtons';
 import ICLine from './src/view/ICLine';
 import ICRadius from './src/radius/ICRadius';
 import ICBottomSheet from './src/modal/ICBottomSheet';
@@ -65,6 +66,7 @@ export {
     ICImageBrowser,
     ICHeaderView,
     ICHeaderButton,
+    ICHeaderRightButtons,
     ICHeaderTitle,
     ICLine,
     ICRadius,
