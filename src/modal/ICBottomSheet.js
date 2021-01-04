@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, TouchableOpacity, Modal} from 'react-native';
+import {View, TouchableOpacity, Modal, Platform} from 'react-native';
 import BottomSheet from 'reanimated-bottom-sheet';
 
 export default class ICBottomSheet extends React.PureComponent {
@@ -9,6 +9,7 @@ export default class ICBottomSheet extends React.PureComponent {
         this.state = {
             visible: false,
         };
+        this.androidHide = true;
     }
 
     render() {
@@ -25,8 +26,17 @@ export default class ICBottomSheet extends React.PureComponent {
                     activeOpacity={1}
                     style={{flex: 1, backgroundColor: transparentColor}}
                     onPress={() => {
-                        this.snapTo(0);
-                        this.snapTo(0);
+                        if (Platform.OS === 'android') {
+                            if (this.androidHide) {
+                                this.androidHide = false;
+                                this.snapTo(0);
+                                this.snapTo(0);
+                            }
+                            this.setState({visible: false});
+                        } else {
+                            this.snapTo(0);
+                            this.snapTo(0);
+                        }
                     }}
                 />
                 <BottomSheet
@@ -50,6 +60,7 @@ export default class ICBottomSheet extends React.PureComponent {
                         if (this.open) {
                             this.hide();
                         }
+                        this.androidHide = true;
                     }}
                     {...this.props}
                     style={[{zIndex: 9}, this.props.style]}
@@ -59,19 +70,20 @@ export default class ICBottomSheet extends React.PureComponent {
     }
 
     show() {
-        this.setState(state => ({
-            visible: true,
-        }), () => {
+        this.setState({visible: true}, () => {
             this.sheet.snapTo(1);
-        });
+        })
     }
 
     hide() {
-        this.setState(state => ({
-            visible: false,
-        }), () => {
+        this.setState({visible: false}, () => {
             this.open = false;
         });
+        if (Platform.OS === 'android') {
+            setTimeout(() => {
+                this.setState({visible: false})
+            }, 100)
+        }
     }
 
     snapTo(index) {
