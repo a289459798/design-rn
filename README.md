@@ -23,7 +23,7 @@
 
 **[ICBadge](https://reactnativeelements.com/docs/badge)**
 
-**[ICBase](#ICBase)**
+**[ICBase](#icbase)**
 
 **[ICRouterBase](#ICRouterBase)**
 
@@ -35,10 +35,10 @@
 
 **[CheckBox](https://reactnativeelements.com/docs/checkbox)**
 
-**[ICGradientView](#ICGradientView)**
+**[ICGradientView](#icgradientview)**
 
 ### ICBase
-<a id="ICBase"></a>
+
 通用API组件
 
 ```js
@@ -172,7 +172,7 @@ import {ICGradientButton} from '@ichong/design-rn';
 />
 ```
 ### ICGradientView
-<a id="ICGradientView"></a>
+
 渐变色View
 
 ```js
