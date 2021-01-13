@@ -1,5 +1,5 @@
 
-# react-native-design-rn
+# @ichong/design-rn
 
 ## react-native 版本要求
 
@@ -55,7 +55,7 @@
 
 **[ICColor](#iccolor)**
 
-**[ICScreen](#icscreen)**
+**[ICFont](#icfont)**
 
 **[ICScreen](#icscreen)**
 
@@ -342,6 +342,35 @@ ICColor.error;
 ICColor.setColor('白色正常模式','暗黑模式');
 // ios 暗黑模式图片适配 ===暂定===
 ICColor.setImage('白色正常模式','暗黑模式');
+```
+
+### ICFont
+
+适配字体大小API
+
+```js
+import {ICFont} from '@ichong/design-rn';
+
+ICFont.f1;
+ICFont.f2;
+ICFont.f3;
+ICFont.f4;
+ICFont.f5;
+ICFont.f6;
+ICFont.f7;
+ICFont.f8;
+ICFont.f9;
+ICFont.f10;
+ICFont.f11;
+ICFont.f12;
+ICFont.f13;
+ICFont.f14;
+ICFont.f15;
+ICFont.f16;
+ICFont.f17;
+ICFont.f18;
+ICFont.bold;
+ICFont.calc(20);
 ```
 
 ### ICScreen
