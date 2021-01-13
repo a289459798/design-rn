@@ -5,27 +5,22 @@ export default class ICTouchableNativeFeedback extends React.PureComponent<Props
 
     render() {
         if (Platform.OS == 'android') {
-            return <TouchableNativeFeedback
-                onPress={(e) => {
-                    if (this.props.eventId) {
-                        Analytics.event(this.props.eventId);
-                    }
-                    this.props.onPress && this.props.onPress(e);
-                }}
-                {...this.props}>
-                {this.props.children}
-            </TouchableNativeFeedback>;
+            return (
+                <TouchableNativeFeedback
+                    {...this.props}
+                >
+                    {this.props.children}
+                </TouchableNativeFeedback>
+            );
         }
-        return <TouchableHighlight
-            onPress={(e) => {
-                if (this.props.eventId) {
-                    Analytics.event(this.props.eventId);
-                }
-                this.props.onPress && this.props.onPress(e);
-            }}
-            underlayColor={'transparent'}
-            {...this.props}>
-            {this.props.children}
-        </TouchableHighlight>;
+        return (
+            <TouchableHighlight
+                underlayColor={'transparent'}
+                {...this.props}
+            >
+                {this.props.children}
+            </TouchableHighlight>
+        );
     }
+
 }

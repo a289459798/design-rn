@@ -1,7 +1,6 @@
+
 'use strict';
-import React, {
-    PureComponent,
-} from 'react';
+import React, {PureComponent} from 'react';
 import {
     PanResponder,
     View,
@@ -10,16 +9,12 @@ import {
 
 export default class ICSlideslipView extends PureComponent {
 
-    // 构造
     constructor(props) {
         super(props);
-        // 初始状态
-
         this._drag = [];
         this.target = {};
 
         this._panResponder = PanResponder.create({
-            // 要求成为响应者：
             onStartShouldSetPanResponder: (evt, gestureState) => {
                 if (this.target[evt.target]) {
                     return false;
@@ -30,7 +25,6 @@ export default class ICSlideslipView extends PureComponent {
                 return true;
             },
             onStartShouldSetPanResponderCapture: (evt, gestureState) => {
-
                 if (this.target[evt.target]) {
                     return false;
                 }
@@ -41,10 +35,8 @@ export default class ICSlideslipView extends PureComponent {
             },
             onMoveShouldSetPanResponder: (evt, gestureState) => false,
             onMoveShouldSetPanResponderCapture: (evt, gestureState) => false,
-
             onPanResponderTerminationRequest: (evt, gestureState) => true,
             onPanResponderGrant: (evt, gestureState) => {
-
                 if (this._drag) {
                     this._drag.forEach((v, k) => {
                         try {

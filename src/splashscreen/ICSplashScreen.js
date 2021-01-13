@@ -15,6 +15,7 @@ class ICSplashScreen {
     hide() {
         RNSplashScreen.hide();
     }
+
 }
 
 export default new ICSplashScreen();

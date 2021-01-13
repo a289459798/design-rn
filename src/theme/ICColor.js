@@ -37,6 +37,6 @@ export default {
         } else {
             return RNDesignRn.isDark == 1 ? (self.darkImage[key] ? self.darkImage[key] : self.lightImage[key]) : self.lightImage[key];
         }
-        
     },
+
 };

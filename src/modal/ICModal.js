@@ -12,7 +12,6 @@ export default class ICModal extends React.PureComponent {
     }
 
     render() {
-
         return (
             <Modal
                 useNativeDriver={true}
@@ -28,8 +27,8 @@ export default class ICModal extends React.PureComponent {
                 <View style={[{backgroundColor: '#fff'}, this.props.style]}>
                     {this.props.children}
                 </View>
-            </Modal>);
-
+            </Modal>
+        );
     }
 
     show() {

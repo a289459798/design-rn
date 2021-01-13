@@ -1,17 +1,25 @@
 import * as React from 'react';
-import {View, ViewProps, Platform, Image, StyleSheet} from 'react-native';
+import {View, ViewProps, Platform, Image, StyleSheet, requireNativeComponent} from 'react-native';
 import ICScreen from '../theme/ICScreen';
+
+const RCTImageCapInset = Platform.OS === 'android' ? requireNativeComponent('RCTImageCapInset') : null;
 
 export default class ICShadow extends React.PureComponent<ViewProps, any> {
 
     render() {
+        /**
+         * type : 渐变程度默认最浅，moderate：中等程度，severe：中度程度，
+         */
         const {style, children, type} = this.props;
         if (Platform.OS === 'android') {
             return (
                 <View style={[style, {overflow: 'visible'}]}>
                     {children}
                     <View style={styles.androidView}>
-                        <Image source={{'uri': 'ic_yy'}} style={styles.androidImage}/>
+                        <RCTImageCapInset
+                            style={styles.androidImage}
+                            source={{'uri': type === 'moderate' ? 'ic_yy_moderate' : type === 'severe' ? 'ic_yy_severe' : 'ic_yy_mild'}}
+                        />
                     </View>
                 </View>
             );

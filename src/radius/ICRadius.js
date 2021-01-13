@@ -1,11 +1,9 @@
 import * as React from 'react';
 import {View, ViewProps} from 'react-native';
-import ICScreen from '../theme/ICScreen';
 
 export default class ICRadius extends React.PureComponent<ViewProps, any> {
 
     render() {
-
         let {radius} = this.props;
         let style = {};
         if (typeof radius === 'number') {
@@ -16,8 +14,11 @@ export default class ICRadius extends React.PureComponent<ViewProps, any> {
             style.borderBottomLeftRadius = radius[2];
             style.borderTopLeftRadius = radius[3];
         }
-        return <View {...this.props} style={[style, this.props.style]}>
-            {this.props.children}
-        </View>;
+        return (
+            <View {...this.props} style={[style, this.props.style]}>
+                {this.props.children}
+            </View>
+        );
     }
+
 }

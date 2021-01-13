@@ -3,9 +3,7 @@
  */
 
 'use strict';
-import React, {
-    PureComponent,
-} from 'react';
+import React, {PureComponent} from 'react';
 import {
     StyleSheet,
     Text,
@@ -20,7 +18,6 @@ export default class ICSkeleton extends PureComponent {
 
     constructor(props) {
         super(props);
-
         this.state = {
             fadeOutOpacity: new Animated.Value(1),
             hide: false,
@@ -30,11 +27,8 @@ export default class ICSkeleton extends PureComponent {
 
     render() {
         return (
-            <View
-                style={[styles.container, {backgroundColor: '#fff'}]}>
-                <Animated.View
-                    style={[styles.container, {opacity: this.state.fadeOutOpacity}]}>
-
+            <View style={[styles.container, {backgroundColor: '#fff'}]}>
+                <Animated.View style={[styles.container, {opacity: this.state.fadeOutOpacity}]}>
                     {this.props.children}
                 </Animated.View>
             </View>
@@ -42,9 +36,7 @@ export default class ICSkeleton extends PureComponent {
     }
 
     componentDidMount() {
-
         InteractionManager.runAfterInteractions(() => {
-
             if (!this.props.noAnimated) {
                 this.anim = Animated.loop(
                     Animated.sequence([
@@ -54,8 +46,6 @@ export default class ICSkeleton extends PureComponent {
                             useNativeDriver: true,
                             easing: Easing.bezier(.56, .63, .99, .75),
                         }),
-
-
                         Animated.timing(this.state.fadeOutOpacity, {
                             toValue: 1,
                             duration: 500,
@@ -65,9 +55,7 @@ export default class ICSkeleton extends PureComponent {
                     ]),
                 ).start();
             }
-
         });
-
     }
 
 };
@@ -75,7 +63,9 @@ export default class ICSkeleton extends PureComponent {
 
 const styles = StyleSheet.create({
     container: {
-        position: 'absolute', width: '100%', height: '100%',
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
     },
 
 });

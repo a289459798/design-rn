@@ -5,14 +5,14 @@ import ICListView from './ICListView';
 export default class ICGridView extends React.PureComponent<FlatListProps, any> {
 
     render() {
-        return <ICListView
-            {...this.props}
-            columnWrapperStyle={{
-                justifyContent: 'space-between',
-                ...this.props.columnWrapperStyle,
-            }}
-        >
-
-        </ICListView>;
+        return (
+            <ICListView
+                {...this.props}
+                columnWrapperStyle={{
+                    justifyContent: 'space-between',
+                    ...this.props.columnWrapperStyle,
+                }}
+            />
+        );
     }
 }

@@ -1,11 +1,9 @@
 import * as React from 'react';
 import {View, Animated, StatusBar} from 'react-native';
-import ICTouchableNativeFeedback from '../touchable/ICTouchableNativeFeedback';
 import ICFont from '../theme/ICFont';
 import ICText from '../text/ICText';
 import ICHeaderButton from './ICHeaderButton';
 import ICLine from '../view/ICLine';
-import ICColor from '../theme/ICColor';
 import ICScreen from '../theme/ICScreen';
 
 export default class ICHeaderView extends React.PureComponent {
@@ -31,10 +29,10 @@ export default class ICHeaderView extends React.PureComponent {
                         paddingHorizontal: ICFont.f10,
                         zIndex: 9,
                     }, this.props.style]}>
-                    {this.props.leftButtons ?
+                    {this.props.leftButtons ? (
                         <ICHeaderButton items={this.props.leftButtons} style={this.props.leftStyle}/>
-                        : this.props.leftComponent ? this.props.leftComponent : <View/>}
-                    {this.props.centerComponent || this.props.title ?
+                    ) : this.props.leftComponent ? this.props.leftComponent : <View/>}
+                    {this.props.centerComponent || this.props.title ? (
                         <View style={[{
                             flex: 1,
                             alignItems: 'center',
@@ -43,14 +41,16 @@ export default class ICHeaderView extends React.PureComponent {
                             left: 0,
                             right: 0,
                         }, this.props.centerStyle]}>
-                            {this.props.centerComponent ||
-                            <ICText style={[{fontSize: ICFont.f16}, this.props.titleStyle]}>
-                                {this.props.title}
-                            </ICText>}
-                        </View> : null}
-                    {this.props.rightButtons ?
+                            {this.props.centerComponent || (
+                                <ICText style={[{fontSize: ICFont.f16}, this.props.titleStyle]}>
+                                    {this.props.title}
+                                </ICText>
+                            )}
+                        </View>
+                    ) : null}
+                    {this.props.rightButtons ? (
                         <ICHeaderButton items={this.props.rightButtons} style={[this.props.rightStyle]}/>
-                        : this.props.rightComponent ? this.props.rightComponent : null}
+                    ) : this.props.rightComponent ? this.props.rightComponent : null}
                 </Animated.View>
                 {this.props.showLine ? <ICLine/> : null}
             </>

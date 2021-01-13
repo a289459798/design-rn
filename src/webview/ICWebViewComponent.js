@@ -4,19 +4,15 @@
 
 
 'use strict';
-import React, {
-    Component,
-} from 'react';
+import React, {Component} from 'react';
 import {
     StyleSheet,
     View, Text, TouchableWithoutFeedback, PanResponder, StatusBar, Share,
 } from 'react-native';
 
-
 import ICBase from '../base/ICBase';
 import ICWebView from './ICWebView';
 import ICScreen from '../theme/ICScreen';
-import ICImage from '../image/ICImage';
 import ICGradientView from '../gradient/ICGradientView';
 import ICTouchableWithoutFeedback from '../touchable/ICTouchableWithoutFeedback';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -26,16 +22,21 @@ import ICText from '../text/ICText';
 export default class ICWebViewComponent extends ICBase {
 
     static navigationOptions = ({navigation}) => {
-
         return ICBase.navigationOptions({navigation}, {
             title: navigation.state.params.title || '加载中...',
-            headerLeft: <Icon name={'close'} color={'#333'} size={24}
-                              onPress={() => {
-                                  let status = navigation.state.params.onLeftPress && navigation.state.params.onLeftPress();
-                                  if (!status) {
-                                      navigation.pop();
-                                  }
-                              }}/>,
+            headerLeft: (
+                <Icon
+                    name={'close'}
+                    color={'#333'}
+                    size={24}
+                    onPress={() => {
+                        let status = navigation.state.params.onLeftPress && navigation.state.params.onLeftPress();
+                        if (!status) {
+                            navigation.pop();
+                        }
+                    }}
+                />
+            ),
         });
     };
 
@@ -50,7 +51,6 @@ export default class ICWebViewComponent extends ICBase {
             showShare: false,
             showBottom: true,
         };
-
         this.showBack = true;
     }
 
@@ -59,7 +59,6 @@ export default class ICWebViewComponent extends ICBase {
     }
 
     onMessage(e) {
-
     }
 
     getParams(key) {
@@ -109,7 +108,6 @@ export default class ICWebViewComponent extends ICBase {
 
     runJs() {
         return '';
-
     }
 
     _getFunctionName() {
@@ -139,9 +137,7 @@ export default class ICWebViewComponent extends ICBase {
     }
 
     _renderWebView() {
-
         if (this.getParams('uri')) {
-
             let source = {
                 uri: `${decodeURIComponent(this.getParams('uri'))}${this.getParams('uri').indexOf('?') == -1 ? '?' : '&'}${this.getUrlParams()}`,
             };
@@ -154,7 +150,6 @@ export default class ICWebViewComponent extends ICBase {
             if (this.getParams('headers')) {
                 source.headers = this.getParams('headers');
             }
-
             return (
                 <ICWebView
                     ref={r => this.webview = r}
@@ -177,20 +172,23 @@ export default class ICWebViewComponent extends ICBase {
                     startInLoadingState={true}
                     onLoadStart={() => this.loaded = false}
                     renderLoading={(res) => {
-                        return (<View style={{width: '100%', height: ICScreen.calc(2), position: 'absolute', top: 0}}>
-                            <View style={{width: '100%', height: '100%', backgroundColor: '#ddd'}}/>
-                            <ICGradientView
-                                ref={r => this.progress = r}
-                                colors={['#8089FF', '#7089FF']}
-                                end={{x: 1, y: 0}}
-                                style={{
-                                    position: 'absolute',
-                                    left: 0,
-                                    width: 0,
-                                    height: '100%',
-                                    zIndex: 9,
-                                }}/>
-                        </View>);
+                        return (
+                            <View style={{width: '100%', height: ICScreen.calc(2), position: 'absolute', top: 0}}>
+                                <View style={{width: '100%', height: '100%', backgroundColor: '#ddd'}}/>
+                                <ICGradientView
+                                    ref={r => this.progress = r}
+                                    colors={['#8089FF', '#7089FF']}
+                                    end={{x: 1, y: 0}}
+                                    style={{
+                                        position: 'absolute',
+                                        left: 0,
+                                        width: 0,
+                                        height: '100%',
+                                        zIndex: 9,
+                                    }}
+                                />
+                            </View>
+                        );
                     }}
                     injectedJavaScript={this.injectedJavaScript()}
                     onLoadProgress={({nativeEvent}) => {
@@ -237,17 +235,18 @@ export default class ICWebViewComponent extends ICBase {
                     }}
                     {...this.getProps()}
                 >
-
                 </ICWebView>
             );
         } else if (this.getParams('html')) {
-
             let html = `
-                <html><head>
-<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
-<style> img {max-width: 100%}</style>
-</head><body>${this.getParams('html')}</body></html>
-            `;
+                    <html>
+                        <head>
+                            <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+                            <style> img {max-width: 100%}</style>
+                        </head>
+                        <body>${this.getParams('html')}</body>
+                    </html>
+                `;
             return (
                 <ICWebView
                     ref={r => this.webview = r}
@@ -271,11 +270,9 @@ export default class ICWebViewComponent extends ICBase {
                     }}
                     {...this.getProps()}
                 >
-
                 </ICWebView>
             );
         } else {
-
             return (null);
         }
     }
@@ -284,57 +281,78 @@ export default class ICWebViewComponent extends ICBase {
         return (
             <View style={{flex: 1}}>
                 {this._renderWebView()}
-
-                {this.getParams('uri') && this.state.showBottom && <View ref={(r) => this.back = r} style={{
-                    height: ICScreen.calc(40),
-                    backgroundColor: '#fff',
-                    borderTopColor: '#e2e2e2',
-                    borderTopWidth: StyleSheet.hairlineWidth,
-                }}>
+                {this.getParams('uri') && this.state.showBottom && (
                     <View
+                        ref={(r) => this.back = r}
                         style={{
                             height: ICScreen.calc(40),
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
-                            flexDirection: 'row',
-                        }}>
-
-                        <Icon style={{padding: 10}} onPress={() => {
-                            if (this.state.canGoBack) {
-                                this.webview.goBack();
-                            }
-                        }} name={'chevron-left'} color={this.state.canGoBack ? '#666' : '#ddd'} size={24}/>
-
-                        <Icon style={{padding: 10}} onPress={() => {
-                            if (this.state.canGoForward) {
-                                this.webview.goForward();
-                            }
-                        }} name={'chevron-right'} color={this.state.canGoForward ? '#666' : '#ddd'} size={24}/>
-
-                        <Icon style={{padding: 10}} onPress={() => {
-                            this.webview.reload();
-                        }} name={'refresh'} color={'#666'} size={22}/>
-
-                        <Icon style={{padding: 10}} onPress={() => {
-                            if (this.state.showShare) {
-                                Share.share({
-                                    url: this.state.url,
-                                    message: this.getParams('title'),
-                                    title: this.getParams('title'),
-                                });
-                            }
-
-                        }} name={'share-variant'} color={this.state.showShare ? '#666' : '#ddd'} size={20}/>
-
+                            backgroundColor: '#fff',
+                            borderTopColor: '#e2e2e2',
+                            borderTopWidth: StyleSheet.hairlineWidth,
+                        }}
+                    >
+                        <View
+                            style={{
+                                height: ICScreen.calc(40),
+                                alignItems: 'center',
+                                justifyContent: 'space-between',
+                                flexDirection: 'row',
+                            }}
+                        >
+                            <Icon
+                                style={{padding: 10}}
+                                onPress={() => {
+                                    if (this.state.canGoBack) {
+                                        this.webview.goBack();
+                                    }
+                                }}
+                                name={'chevron-left'}
+                                color={this.state.canGoBack ? '#666' : '#ddd'}
+                                size={24}
+                            />
+                            <Icon
+                                style={{padding: 10}}
+                                onPress={() => {
+                                    if (this.state.canGoForward) {
+                                        this.webview.goForward();
+                                    }
+                                }}
+                                name={'chevron-right'}
+                                color={this.state.canGoForward ? '#666' : '#ddd'}
+                                size={24}
+                            />
+                            <Icon
+                                style={{padding: 10}}
+                                onPress={() => {
+                                    this.webview.reload();
+                                }}
+                                name={'refresh'}
+                                color={'#666'}
+                                size={22}
+                            />
+                            <Icon
+                                style={{padding: 10}}
+                                onPress={() => {
+                                    if (this.state.showShare) {
+                                        Share.share({
+                                            url: this.state.url,
+                                            message: this.getParams('title'),
+                                            title: this.getParams('title'),
+                                        });
+                                    }
+                                }}
+                                name={'share-variant'}
+                                color={this.state.showShare ? '#666' : '#ddd'}
+                                size={20}
+                            />
+                        </View>
                     </View>
-                </View>}
+                )}
             </View>
         );
-
     }
 
     onNavigationStateChange = (navState) => {
-
         this.setState({
             canGoBack: navState.canGoBack,
             canGoForward: navState.canGoForward,
@@ -345,13 +363,11 @@ export default class ICWebViewComponent extends ICBase {
         }
     };
 
-}
-;
+};
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-
 
 });

@@ -12,10 +12,8 @@ import {
 
 export default class ICGuide extends PureComponent {
 
-    // 构造
     constructor(props) {
         super(props);
-        // 初始状态
         this.state = {
             visible: false,
             step: 1,
@@ -24,7 +22,6 @@ export default class ICGuide extends PureComponent {
     }
 
     render() {
-
         if (!this.state.visible) {
             return null;
         }
@@ -52,14 +49,11 @@ export default class ICGuide extends PureComponent {
                         </View>
                     </View>
                 </TouchableWithoutFeedback>
-
             </Modal>
         );
-
     }
 
     next() {
-
         let step = this.state.step;
         if (this.state.step == this.state.data.length) {
         } else {
@@ -82,12 +76,11 @@ export default class ICGuide extends PureComponent {
             step: 1,
             data: data,
         });
-
     }
 
 }
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         alignItems: 'center',
     },

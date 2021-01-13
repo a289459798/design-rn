@@ -1,6 +1,5 @@
 import React from 'react';
 import {View, TouchableWithoutFeedback, Modal, StyleSheet} from 'react-native';
-import BottomSheet from 'reanimated-bottom-sheet';
 import ICColor from '../theme/ICColor';
 import ICFont from '../theme/ICFont';
 import ICLine from '../view/ICLine';
@@ -19,7 +18,6 @@ export default class ICActionSheet extends React.PureComponent {
     }
 
     render() {
-
         let {list, visible, key} = this.state;
         return (
             <ICModal

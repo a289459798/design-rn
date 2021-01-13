@@ -21,7 +21,12 @@ export default class ICLine extends React.PureComponent<Props, any> {
         } else {
             style.height = StyleSheet.hairlineWidth;
         }
-        return <View
-            {...this.props} style={[style, this.props.style]}/>;
+        return (
+            <View
+                {...this.props}
+                style={[style, this.props.style]}
+            />
+        );
     }
+
 }

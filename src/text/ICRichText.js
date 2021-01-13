@@ -19,8 +19,10 @@ export default class ICRichText extends React.PureComponent<TextProps, any> {
             }
             return <ICText>{t}<ICText {...this.props.data.props}>{this.props.data.text}</ICText></ICText>;
         });
-        return <ICText {...this.props}>
-            {view}
-        </ICText>;
+        return (
+            <ICText {...this.props}>
+                {view}
+            </ICText>
+        );
     }
 }
