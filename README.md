@@ -38,7 +38,7 @@
 **[ICGradientView](#ICGradientView)**
 
 ### ICBase
-
+<a id="ICBase"></a>
 通用API组件
 
 ```js
@@ -172,7 +172,7 @@ import {ICGradientButton} from '@ichong/design-rn';
 />
 ```
 ### ICGradientView
-
+<a id="ICGradientView"></a>
 渐变色View
 
 ```js
