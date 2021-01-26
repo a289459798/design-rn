@@ -51,6 +51,9 @@ export default class ICImage extends React.PureComponent<ImageProps, any> {
                             }
                             this.setState({load: true, style: newStyle});
                         }}
+                        onError={() => {
+                            this.setState({load: false});
+                        }}
                         {...this.props}
                         style={[this.props.style, this.state.style]}
                     />
