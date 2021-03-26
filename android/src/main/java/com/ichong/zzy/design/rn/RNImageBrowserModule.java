@@ -40,6 +40,7 @@ public class RNImageBrowserModule extends ReactContextBaseJavaModule {
             .setIndex(index)
             .setImageList(images)
             .setEnableDragClose(true)
+            .setEnableUpDragClose(true)
             .start();
     }
 
