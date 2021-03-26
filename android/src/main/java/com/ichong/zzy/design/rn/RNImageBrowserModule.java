@@ -24,13 +24,11 @@ public class RNImageBrowserModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void show(ReadableArray list) {
-
         show(list, 0);
     }
 
     @ReactMethod
     public void show(ReadableArray list, int index) {
-
         ArrayList<String> images = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
             ReadableMap map = list.getMap(i);
@@ -41,9 +39,8 @@ public class RNImageBrowserModule extends ReactContextBaseJavaModule {
             .setContext(reactContext.getCurrentActivity())
             .setIndex(index)
             .setImageList(images)
-            .setShowDownButton(true)
+            .setEnableDragClose(true)
             .start();
     }
-
 
 }
