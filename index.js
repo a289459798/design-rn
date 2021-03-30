@@ -10,6 +10,7 @@ import ICCheckBox from './src/checkbox/ICCheckBox';
 import ICListView from './src/list/ICListView';
 import ICGridView from './src/list/ICGridView';
 import ICShadow from './src/shadow/ICShadow';
+import ICSlider from './src/slider/ICSlider';
 import ICGradientView from './src/gradient/ICGradientView';
 import ICTouchable from './src/touchable/ICTouchable';
 import ICTouchableNativeFeedback from './src/touchable/ICTouchableNativeFeedback';
@@ -51,6 +52,7 @@ export {
     ICListView,
     ICGridView,
     ICShadow,
+    ICSlider,
     ICGradientView,
     ICTouchable,
     ICTouchableNativeFeedback,
