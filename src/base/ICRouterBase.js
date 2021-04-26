@@ -21,12 +21,10 @@ export default class ICRouterBase extends React.Component {
     }
 
     replaceView(component, props) {
-
         this.props.navigation.replace(component, props);
     }
 
     replacePrevious(component, props) {
-
         let key = '';
         if (this.props.nav && this.props.nav.routes[this.props.nav.index]) {
             for (let i in this.props.nav.routes[this.props.nav.index].routes) {
@@ -45,8 +43,25 @@ export default class ICRouterBase extends React.Component {
         this.popView();
     }
 
-    replaceWithScreen(oldComponent, newComponent, props) {
+    replaceNext(component, props) {
+        let key = '';
+        if (this.props.nav && this.props.nav.routes[this.props.nav.index]) {
+            for (let i in this.props.nav.routes[this.props.nav.index].routes) {
+                if (i == this.props.nav.routes[this.props.nav.index].routes.length - 1) {
+                    key = this.props.nav.routes[this.props.nav.index].routes[i].key;
+                    break;
+                }
+            }
+        }
+        const replaceAction = StackActions.replace({
+            key: key,
+            routeName: component,
+            params: props,
+        });
+        this.props.navigation.dispatch(replaceAction);
+    }
 
+    replaceWithScreen(oldComponent, newComponent, props) {
         let key = '';
         let n = 1;
         if (this.props.nav && this.props.nav.routes[this.props.nav.index]) {
@@ -76,11 +91,11 @@ export default class ICRouterBase extends React.Component {
     }
 
     openURL(url, data) {
-
         if (url.indexOf('http://') == 0 || url.indexOf('https://') == 0) {
             this.pushView('WebView', {uri: url, ...data});
             return;
         }
         Linking.openURL(url);
     }
+
 }
