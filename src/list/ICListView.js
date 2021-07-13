@@ -27,22 +27,16 @@ export default class ICListView extends React.PureComponent<FlatListProps, any> 
         return (null);
     }
 
-    _renderRefresh() {
-        if (typeof this.props.isRefreshing != 'undefined') {
-            return (
-                <RefreshControl
-                    refreshing={this.props.isRefreshing}
-                    onRefresh={() => {
-                        this.props.onRefresh();
-                    }}
-                />
-            );
-        }
-        return (null);
+    scrollToItem(params) {
+        this.ref && this.ref.scrollToOffset(params);
     }
 
-    scrollToIndex(data) {
-        this.ref.scrollToIndex(data);
+    scrollToOffset(params) {
+        this.ref && this.ref.scrollToOffset(params);
+    }
+
+    scrollToIndex(params) {
+        this.ref && this.ref.scrollToIndex(params);
     }
 
     scrollToEnd() {
