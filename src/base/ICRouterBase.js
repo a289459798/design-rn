@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Linking} from 'react-native';
-import {StackActions} from 'react-navigation';
+import {StackActions, NavigationActions} from 'react-navigation';
 
 export default class ICRouterBase extends React.Component {
 
@@ -88,6 +88,14 @@ export default class ICRouterBase extends React.Component {
 
     push(component, props, type = '') {
         this.props.navigation.push(component, {...props, transition: type});
+    }
+
+    reset(component) {
+        const resetAction = StackActions.reset({
+            index: 0,
+            actions: [NavigationActions.navigate({ routeName: component })],
+        });
+        this.props.navigation.dispatch(resetAction);
     }
 
     openURL(url, data) {
