@@ -170,6 +170,7 @@ export default class ICWebViewComponent extends ICBase {
                     domStorageEnabled={true}
                     javaScriptEnabled={true}
                     startInLoadingState={true}
+                    allowsInlineMediaPlayback={true}
                     onLoadStart={() => this.loaded = false}
                     renderLoading={(res) => {
                         return (
@@ -254,6 +255,7 @@ export default class ICWebViewComponent extends ICBase {
                     onNavigationStateChange={this.onNavigationStateChange}
                     style={{flex: 1}}
                     decelerationRate="normal"
+                    allowsInlineMediaPlayback={true}
                     onShouldStartLoadWithRequest={(data) => {
                         if (data.url == 'about:blank') {
                             return true;
