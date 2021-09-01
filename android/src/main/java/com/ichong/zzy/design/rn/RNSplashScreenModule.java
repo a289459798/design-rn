@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -79,8 +80,18 @@ public class RNSplashScreenModule extends ReactContextBaseJavaModule {
                     mSplashDialog = new MyDialog(
                         activity,
                         R.style.SplashScreen_Fullscreen);
+
+
                     mSplashDialog.setContentView(view);
                     mSplashDialog.setCancelable(false);
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                        Window window = mSplashDialog.getWindow();
+                        WindowManager.LayoutParams lp = window.getAttributes();
+                        lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+                        window.setAttributes(lp);
+                        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+                    }
 
                     if (!mSplashDialog.isShowing()) {
                         mSplashDialog.show();
@@ -207,25 +218,5 @@ class MyDialog extends Dialog {
 
     public MyDialog(@NonNull Context context, int themeResId) {
         super(context, themeResId);
-    }
-
-    private void fullScreenImmersive(View view) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            int uiOptions = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_FULLSCREEN;
-            view.setSystemUiVisibility(uiOptions);
-        }
-    }
-
-    @Override
-    public void show() {
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
-        super.show();
-        fullScreenImmersive(getWindow().getDecorView());
-        this.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
     }
 }
