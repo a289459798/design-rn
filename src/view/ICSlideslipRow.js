@@ -30,7 +30,12 @@ export default class ICSlideslipRow extends PureComponent {
         return (
             <View
                 ref={(r) => this.layout = r}
-                style={[{flex: 1, backgroundColor: '#fff', overflow: 'hidden', height: this.state.height}]}
+                style={[{
+                    flex: 1,
+                    backgroundColor: '#fff',
+                    overflow: 'hidden',
+                    height: this.state.height,
+                }, this.props.style]}
             >
                 <View style={{position: 'absolute', left: 0, right: 0, top: 0, bottom: 0}}>
                     {this.props.menus && this.props.menus.map((v, k) => (
