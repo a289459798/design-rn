@@ -100,7 +100,7 @@ export default class ICSlideslipRow extends PureComponent {
                         this.index = v.nativeEvent.index;
                     }}
                     onStop={(d) => {
-                        if (d.nativeEvent.x == 0) {
+                        if (parseInt(d.nativeEvent.x) == 0) {
                             this.props.sideslipView && this.props.sideslipView().onStop(this.view, false);
                         } else {
                             this.props.sideslipView && this.props.sideslipView().onStop(this.view, true);
