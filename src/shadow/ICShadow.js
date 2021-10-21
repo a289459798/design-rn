@@ -35,7 +35,7 @@ export default class ICShadow extends React.PureComponent<ViewProps, any> {
                 uri = {'uri': 'ic_yy_mild'};
             } else if (style.borderRadius == ICScreen.calc(16) || style.borderRadius == 16) {    // 默认为圆角8
                 uri = {'uri': 'ic_yy_mild_radius_16'};
-            }else { // 默认为圆角8
+            } else { // 默认为圆角8
                 uri = {'uri': 'ic_yy_mild'};
             }
         }
@@ -63,7 +63,7 @@ export default class ICShadow extends React.PureComponent<ViewProps, any> {
         return (
             <View
                 {...this.props}
-                style={[type === 'moderate'? styles.shadowModerateView : type === 'severe'? styles.shadowSevereView : styles.shadowMildView, style]}
+                style={[type === 'moderate' ? styles.shadowModerateView : type === 'severe' ? styles.shadowSevereView : styles.shadowMildView, style]}
             >
                 {children}
             </View>
