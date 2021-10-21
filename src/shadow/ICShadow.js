@@ -6,9 +6,45 @@ const RCTImageCapInset = Platform.OS === 'android' ? requireNativeComponent('RCT
 
 export default class ICShadow extends React.PureComponent<ViewProps, any> {
 
+    androidUri(type, style) {
+        let uri;
+        if (type === 'moderate') {
+            if (style.borderRadius == ICScreen.calc(4) || style.borderRadius == 4) {
+                uri = {'uri': 'ic_yy_moderate_radius_4'};
+            } else if (style.borderRadius == ICScreen.calc(8) || style.borderRadius == 8) {
+                uri = {'uri': 'ic_yy_moderate'};
+            } else if (style.borderRadius == ICScreen.calc(16) || style.borderRadius == 16) {
+                uri = {'uri': 'ic_yy_moderate_radius_16'};
+            } else { // 默认为圆角8
+                uri = {'uri': 'ic_yy_moderate'};
+            }
+        } else if (type === 'severe') {
+            if (style.borderRadius == ICScreen.calc(4) || style.borderRadius == 4) {
+                uri = {'uri': 'ic_yy_severe_radius_4'};
+            } else if (style.borderRadius == ICScreen.calc(8) || style.borderRadius == 8) {
+                uri = {'uri': 'ic_yy_severe'};
+            } else if (style.borderRadius == ICScreen.calc(16) || style.borderRadius == 16) {
+                uri = {'uri': 'ic_yy_severe_radius_16'};
+            } else { // 默认为圆角8
+                uri = {'uri': 'ic_yy_severe'};
+            }
+        } else {
+            if (style.borderRadius == ICScreen.calc(4) || style.borderRadius == 4) {
+                uri = {'uri': 'ic_yy_mild_radius_4'};
+            } else if (style.borderRadius == ICScreen.calc(8) || style.borderRadius == 8) {
+                uri = {'uri': 'ic_yy_mild'};
+            } else if (style.borderRadius == ICScreen.calc(16) || style.borderRadius == 16) {    // 默认为圆角8
+                uri = {'uri': 'ic_yy_mild_radius_16'};
+            }else { // 默认为圆角8
+                uri = {'uri': 'ic_yy_mild'};
+            }
+        }
+        return uri;
+    }
+
     render() {
         /**
-         * type : 渐变程度默认最浅，moderate：中等程度，severe：中度程度，
+         * type : 渐变程度默认最浅，moderate：中等程度，severe：重度程度
          */
         const {style, children, type} = this.props;
         if (Platform.OS === 'android') {
@@ -18,7 +54,7 @@ export default class ICShadow extends React.PureComponent<ViewProps, any> {
                     <View style={styles.androidView}>
                         <RCTImageCapInset
                             style={styles.androidImage}
-                            source={{'uri': type === 'moderate' ? 'ic_yy_moderate' : type === 'severe' ? 'ic_yy_severe' : 'ic_yy_mild'}}
+                            source={this.androidUri(type, style)}
                         />
                     </View>
                 </View>
