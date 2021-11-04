@@ -26,6 +26,7 @@ export default class ICWebViewComponent extends ICBase {
             title: navigation.state.params.title || '加载中...',
             headerLeft: (
                 <Icon
+                    style={styles.leftIcon}
                     name={'close'}
                     color={'#333'}
                     size={24}
@@ -371,5 +372,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-
+    leftIcon: {
+        paddingLeft: 8,
+    },
 });
