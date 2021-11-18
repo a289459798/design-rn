@@ -24,6 +24,27 @@ export default class ICRouterBase extends React.Component {
         this.props.navigation.replace(component, props);
     }
 
+    replaceWithDelta(component, delta, props) {
+        let key = '';
+        if (this.props.nav && this.props.nav.routes[this.props.nav.index]) {
+            for (let i in this.props.nav.routes[this.props.nav.index].routes) {
+                if (i == this.props.nav.routes[this.props.nav.index].routes.length - delta) {
+                    key = this.props.nav.routes[this.props.nav.index].routes[i].key;
+                    break;
+                }
+            }
+        }
+        const replaceAction = StackActions.replace({
+            key: key,
+            routeName: component,
+            params: props,
+        });
+        this.props.navigation.dispatch(replaceAction);
+        for (let i = 1; i < delta; i++) {
+            this.popView();
+        }
+    }
+
     replacePrevious(component, props) {
         let key = '';
         if (this.props.nav && this.props.nav.routes[this.props.nav.index]) {
