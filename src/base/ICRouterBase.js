@@ -20,10 +20,12 @@ export default class ICRouterBase extends React.Component {
         this.props.navigation.pop(n);
     }
 
+    // 替换当前路由
     replaceView(component, props) {
         this.props.navigation.replace(component, props);
     }
 
+    // 替换上级某个路由并返回
     replaceWithDelta(component, delta, props) {
         let key = '';
         if (this.props.nav && this.props.nav.routes[this.props.nav.index]) {
@@ -45,6 +47,7 @@ export default class ICRouterBase extends React.Component {
         }
     }
 
+    // 替换一个上级路由并返回
     replacePrevious(component, props) {
         let key = '';
         if (this.props.nav && this.props.nav.routes[this.props.nav.index]) {
@@ -64,6 +67,7 @@ export default class ICRouterBase extends React.Component {
         this.popView();
     }
 
+    // 替换下个路由
     replaceNext(component, props) {
         let key = '';
         let length = 1;
@@ -120,7 +124,7 @@ export default class ICRouterBase extends React.Component {
     reset(component) {
         const resetAction = StackActions.reset({
             index: 0,
-            actions: [NavigationActions.navigate({ routeName: component })],
+            actions: [NavigationActions.navigate({routeName: component})],
         });
         this.props.navigation.dispatch(resetAction);
     }
