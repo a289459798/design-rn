@@ -45,20 +45,26 @@ export default class ICRouterBase extends React.Component {
 
     replaceNext(component, props) {
         let key = '';
+        let length = 1;
         if (this.props.nav && this.props.nav.routes[this.props.nav.index]) {
             for (let i in this.props.nav.routes[this.props.nav.index].routes) {
                 if (i == this.props.nav.routes[this.props.nav.index].routes.length - 1) {
+                    length = this.props.nav.routes[this.props.nav.index].routes.length;
                     key = this.props.nav.routes[this.props.nav.index].routes[i].key;
                     break;
                 }
             }
         }
-        const replaceAction = StackActions.replace({
-            key: key,
-            routeName: component,
-            params: props,
-        });
-        this.props.navigation.dispatch(replaceAction);
+        if (length > 1) {
+            const replaceAction = StackActions.replace({
+                key: key,
+                routeName: component,
+                params: props,
+            });
+            this.props.navigation.dispatch(replaceAction);
+        } else {
+            this.pushView(component, props);
+        }
     }
 
     replaceWithScreen(oldComponent, newComponent, props) {
