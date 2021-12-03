@@ -6,7 +6,7 @@ const RCTImageCapInset = Platform.OS === 'android' ? requireNativeComponent('RCT
 
 export default class ICShadow extends React.PureComponent<ViewProps, any> {
 
-    androidUri(type, style) {
+    androidUri(type, style = {}) {
         let uri;
         if (type === 'moderate') {
             if (style.borderRadius == ICScreen.calc(4) || style.borderRadius == 4) {
