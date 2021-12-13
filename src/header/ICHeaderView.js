@@ -9,7 +9,7 @@ import ICScreen from '../theme/ICScreen';
 export default class ICHeaderView extends React.PureComponent {
 
     setNativeProps = (nativeProps) => {
-        this._view.setNativeProps(nativeProps);
+        this._view && this._view.setNativeProps(nativeProps);
     };
 
     render() {

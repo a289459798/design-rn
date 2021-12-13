@@ -14,6 +14,7 @@ import ICHeaderButton from '../header/ICHeaderButton';
 import ICFont from '../theme/ICFont';
 import Toast from '@ichong/react-native-toast';
 import ICRouterBase from './ICRouterBase';
+import ICScreen from '../theme/ICScreen';
 
 let navigationTitle;
 export default class ICBase extends ICRouterBase {
@@ -28,6 +29,7 @@ export default class ICBase extends ICRouterBase {
                 borderBottomColor: '#F0F0F0',
                 shadowOpacity: 0,
                 elevation: 0,
+                marginTop: ICScreen.iphone12 ? 24 : 0,
             }, navigation.getParam('headerStyle'), params.headerStyle),
             headerRight: <View
                 style={{paddingRight: 10}}>{navigation.getParam('headerRight') || params.headerRight}</View>,

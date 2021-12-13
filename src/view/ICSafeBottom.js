@@ -6,7 +6,7 @@ export default class ICSafeBottom extends React.PureComponent<Props, any> {
 
     render() {
         return (
-            <View style={{backgroundColor: '#fff', paddingBottom: ICScreen.iphonx ? 39 : 0}}>
+            <View style={{backgroundColor: '#fff', paddingBottom: ICScreen.iphonx ? 34 : 0}}>
                 {this.props.children}
             </View>
         );
