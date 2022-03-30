@@ -13,7 +13,7 @@ export default class ICHeaderView extends React.PureComponent {
     };
 
     render() {
-        let statusBarHeight = ICScreen.iphonx ? 44 : ICScreen.iphone ? 20 : StatusBar.currentHeight;
+        let statusBarHeight = (ICScreen.iphonx || ICScreen.iphone12) ? 44 : ICScreen.iphone ? 20 : StatusBar.currentHeight;
         return (
             <>
                 <Animated.View
