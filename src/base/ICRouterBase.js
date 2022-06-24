@@ -130,6 +130,10 @@ export default class ICRouterBase extends React.Component {
     }
 
     openURL(url, data) {
+        if (!url) {
+            alert('链接不存在');
+            return;
+        }
         if (url.indexOf('http://') == 0 || url.indexOf('https://') == 0) {
             this.pushView('WebView', {uri: url, ...data});
             return;
