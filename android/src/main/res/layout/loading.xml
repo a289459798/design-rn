@@ -11,8 +11,7 @@
         android:layout_centerHorizontal="true"
         android:scaleType="fitXY"/>
 
-    <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent"
-                    android:layout_marginBottom="180dp">
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
         <com.facebook.drawee.view.DraweeView
             android:id="@+id/ad_image"
             android:layout_width="match_parent"

@@ -75,7 +75,7 @@ RCT_EXPORT_METHOD(showAd: (NSString *) imageUrl
         dispatch_async(dispatch_get_main_queue(), ^{
             _time = time;
             UIWindow *window = [[UIApplication sharedApplication] delegate].window;
-            _imageView = [[SDAnimatedImageView alloc] initWithFrame:CGRectMake(0, 0, window.bounds.size.width, window.bounds.size.height - 180)];
+            _imageView = [[SDAnimatedImageView alloc] initWithFrame:CGRectMake(0, 0, window.bounds.size.width, window.bounds.size.height)];
             _imageView.contentMode = UIViewContentModeScaleAspectFill;
             _imageView.clipsToBounds = YES;
             // 判断图片类型
