@@ -138,7 +138,7 @@ export default class ICWebViewComponent extends ICBase {
     }
 
     injectJavaScript(js) {
-        this.webview.injectJavaScript(js);
+        this.webview && this.webview.injectJavaScript(js);
     }
 
     _renderWebView() {
