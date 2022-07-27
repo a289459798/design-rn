@@ -3,7 +3,9 @@
           package="com.ichong.zzy.design.rn">
 
     <application>
-        <service android:name=".service.DesignService">
+        <service android:name=".service.DesignService"
+                 android:exported="false"
+        >
             <intent-filter>
                 <action android:name="com.ichong.zzy.design.service"></action>
             </intent-filter>
@@ -19,4 +21,3 @@
         </service>
     </application>
 </manifest>
-  
