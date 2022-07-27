@@ -1,28 +1,28 @@
 {
-  "_from": "git+https://gitee.com/petdoctor/design-rn.git",
-  "_id": "@ichong/design-rn@1.0.0",
+  "_from": "git+https://github.com/a289459798/design-rn.git",
+  "_id": "@attacks/design-rn@1.0.0",
   "_inBundle": false,
   "_integrity": "",
-  "_location": "/@ichong/design-rn",
+  "_location": "/@attacks/design-rn",
   "_phantomChildren": {},
   "_requested": {
     "type": "git",
-    "raw": "@ichong/design-rn@git+https://gitee.com/petdoctor/design-rn.git",
-    "name": "@ichong/design-rn",
-    "escapedName": "@ichong%2fdesign-rn",
-    "scope": "@ichong",
-    "rawSpec": "git+https://gitee.com/petdoctor/design-rn.git",
-    "saveSpec": "git+https://gitee.com/petdoctor/design-rn.git",
-    "fetchSpec": "https://gitee.com/petdoctor/design-rn.git",
+    "raw": "@attacks/design-rn@git+https://github.com/a289459798/design-rn.git",
+    "name": "@attacks/design-rn",
+    "escapedName": "@attacks%2fdesign-rn",
+    "scope": "@attacks",
+    "rawSpec": "git+https://github.com/a289459798/design-rn.git",
+    "saveSpec": "git+https://github.com/a289459798/design-rn.git",
+    "fetchSpec": "https://github.com/a289459798/design-rn.git",
     "gitCommittish": null
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "git+https://gitee.com/petdoctor/design-rn.git#598efaedd98c60bdedf51652f7c51e11abce82f8",
-  "_spec": "@ichong/design-rn@git+https://gitee.com/petdoctor/design-rn.git",
-  "_where": "/Users/zhangzy/workspace/android/5ichong/academy",
+  "_resolved": "git+https://github.com/a289459798/design-rn.git#598efaedd98c60bdedf51652f7c51e11abce82f8",
+  "_spec": "@attacks/design-rn@git+https://github.com/a289459798/design-rn.git",
+  "_where": "/Users/zhangzy/workspace/android/5attacks/academy",
   "author": {
     "name": "zhangzy"
   },
@@ -37,13 +37,13 @@
   },
   "deprecated": false,
   "description": "## Getting started",
-  "homepage": "https://gitee.com/petdoctor/design-rn.git#readme",
+  "homepage": "https://github.com/a289459798/design-rn.git#readme",
   "keywords": [
     "react-native"
   ],
   "license": "ISC",
   "main": "index.js",
-  "name": "@ichong/design-rn",
+  "name": "@attacks/design-rn",
   "peerDependencies": {
     "react-native": "^6.0.0",
     "react-native-elements": "^1.2.7",
@@ -59,7 +59,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://gitee.com/petdoctor/design-rn.git"
+    "url": "https://github.com/a289459798/design-rn.git"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
