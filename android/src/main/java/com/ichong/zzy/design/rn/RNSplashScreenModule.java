@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -38,6 +39,7 @@ public class RNSplashScreenModule extends ReactContextBaseJavaModule {
     static int time = 3;
     static Timer timer = new Timer();
     static TextView textView;
+    static Button button;
 
     public RNSplashScreenModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -169,7 +171,9 @@ public class RNSplashScreenModule extends ReactContextBaseJavaModule {
 //                    imageView.setController(controller);
                         imageView.setImageURI(Uri.fromFile(adFile));
                         textView = mSplashDialog.findViewById(R.id.text);
+                        button = mSplashDialog.findViewById(R.id.button);
                         textView.setVisibility(View.VISIBLE);
+                        button.setVisibility(View.VISIBLE);
 
                         textView.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -180,7 +184,7 @@ public class RNSplashScreenModule extends ReactContextBaseJavaModule {
                             }
                         });
 
-                        imageView.setOnClickListener(new View.OnClickListener() {
+                        button.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 if(!isClick) {
